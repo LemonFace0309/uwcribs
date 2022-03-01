@@ -1,0 +1,33 @@
+{
+  "name": "config",
+  "version": "0.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "files": [
+    "eslint-next.js",
+    "eslint-server.js",
+    "jest-next.js",
+    "jest-server.js"
+  ],
+  "dependencies": {
+    "@typescript-eslint/eslint-plugin": "^5.12.0",
+    "@typescript-eslint/parser": "^5.12.0",
+    "eslint": "^8.9.0",
+    "eslint-config-next": "^12.0.8",
+    "eslint-config-prettier": "^8.4.0",
+    "eslint-import-resolver-node": "^0.3.6",
+    "eslint-import-resolver-typescript": "^2.5.0",
+    "eslint-plugin-graphql": "^4.0.0",
+    "eslint-plugin-import": "^2.25.4",
+    "eslint-plugin-import-name": "^1.2.3",
+    "eslint-plugin-jest": "^26.1.1",
+    "eslint-plugin-jest-dom": "^4.0.1",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-prefer-arrow": "^1.2.3",
+    "eslint-plugin-react": "^7.28.0",
+    "eslint-plugin-react-hooks": "^4.3.0",
+    "eslint-plugin-simple-import-sort": "^7.0.0",
+    "eslint-plugin-tailwind": "^0.2.1",
+    "eslint-plugin-testing-library": "^5.0.5"
+  }
+}
