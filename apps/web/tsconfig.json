@@ -3,7 +3,8 @@
   "compilerOptions": {
     "baseUrl": ".",
     "paths": {
-      "@src/*": ["src/*"]
+      "@src/*": ["src/*"],
+      "@root/ui/*": ["../../packages/ui/src/*"]
     }
   },
   "include": ["src/**/*", "next-env.d.ts", "styles/**/*.css"],

@@ -1,10 +1,10 @@
+import { Button } from '@root/ui/components';
 import type { NextPage } from 'next';
-import { Button } from 'ui/Button';
 
 const Home: NextPage = () => {
   return (
-    <div>
-      <Button>Hi</Button>
+    <div className="w-screen h-screen text-white grid place-items-center">
+      <Button>Hello World</Button>
     </div>
   );
 };
