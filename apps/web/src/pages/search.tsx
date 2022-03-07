@@ -1,5 +1,6 @@
-import { Button } from '@root/ui/components';
 import type { NextPage } from 'next';
+
+import { Button } from '@root/ui/components';
 
 const Search: NextPage = () => {
   return (

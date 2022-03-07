@@ -1,8 +1,9 @@
-import "@root/ui/styles/variables.css";
-import 'styles/globals.css';
+import type { AppProps } from 'next/app';
 
 import { Layout } from '@src/components/layout';
-import type { AppProps } from 'next/app';
+
+import "@root/ui/styles/variables.css";
+import 'styles/globals.css';
 
 const MyApp = ({ Component, pageProps }: AppProps) => {
   return (

@@ -6,7 +6,7 @@ module.exports = {
     browser: true,
     node: true,
   },
-  plugins: ['@typescript-eslint', 'import', 'simple-import-sort', 'import-name'],
+  plugins: ['@typescript-eslint', 'simple-import-sort', 'import-name'],
   extends: [
     'eslint:recommended',
     'plugin:react/recommended',
@@ -26,7 +26,27 @@ module.exports = {
 
     // simple-import-sort
     'simple-import-sort/exports': 'error',
-    'simple-import-sort/imports': 'error',
+    'simple-import-sort/imports': [
+      'error',
+      {
+        groups: [
+          // React and Next come first
+          ['^(react|next)'],
+          // External packages.
+          ['^@?\\w'],
+          // Internal packages.
+          ['^(@|@src|@root)(/.*|$)'],
+          // Side effect imports.
+          ['^\\u0000'],
+          // Other relative imports. Put same-folder imports and `.` last.
+          ['^\\./(?=.*/)(?!/?$)', '^\\.(?!/?$)', '^\\./?$'],
+          // Parent imports. Put `..` last.
+          ['^\\.\\.(?!/?$)', '^\\.\\./?$'],
+          // Style imports.
+          ['^.+\\.s?css$'],
+        ],
+      },
+    ],
 
     '@next/next/no-html-link-for-pages': 'off',
 

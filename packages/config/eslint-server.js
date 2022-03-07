@@ -2,7 +2,7 @@ module.exports = {
   env: {
     node: true,
   },
-  plugins: ['@typescript-eslint', 'import', 'simple-import-sort'],
+  plugins: ['@typescript-eslint', 'simple-import-sort'],
   extends: ['eslint:recommended', 'plugin:import/recommended', 'plugin:import/typescript', 'prettier'],
   rules: {
     // eslint:recommended
