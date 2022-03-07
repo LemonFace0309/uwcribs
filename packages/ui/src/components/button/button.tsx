@@ -7,7 +7,7 @@ import styles from './button.module.scss';
 export type Props = {
   children: React.ReactNode;
   className?: string;
-  variant?: 'simple' | 'rounded' | 'outline' | 'nude';
+  variant?: 'simple' | 'rounded' | 'outline' | 'text';
   color?: 'sea' | 'salmon' | 'navy';
 } & React.ComponentPropsWithoutRef<'button'>;
 
