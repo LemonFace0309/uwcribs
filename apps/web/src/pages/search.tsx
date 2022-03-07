@@ -1,12 +1,12 @@
 import { Button } from '@root/ui/components';
 import type { NextPage } from 'next';
 
-const Home: NextPage = () => {
+const Search: NextPage = () => {
   return (
     <div className="w-full text-white grid place-items-center">
-      <Button>Hello World</Button>
+      <Button>Search page</Button>
     </div>
   );
 };
 
-export default Home;
+export default Search;
