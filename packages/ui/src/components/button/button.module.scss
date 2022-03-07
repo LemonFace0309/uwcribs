@@ -1,0 +1,94 @@
+.root {
+  padding: 8px 16px;
+}
+
+/* Variants */
+
+.simple,
+.outline {
+  border-radius: 4px;
+}
+
+.rounded {
+  border-radius: 99999px;
+}
+
+.outline,
+.text {
+  background-color: transparent !important;
+
+  &.sea {
+    color: var(--color-sea-600);
+  }
+  &.salmon {
+    color: var(--color-salmon-600);
+  }
+  &.navy {
+    color: var(--color-navy-600);
+  }
+}
+
+.outline {
+  &.sea {
+    border: 1px solid var(--color-sea-600);
+  }
+  &.salmon {
+    border: 1px solid var(--color-salmon-600);
+  }
+  &.navy {
+    border: 1px solid var(--color-navy-600);
+  }
+}
+
+/* Colors */
+
+.sea {
+  background-color: var(--color-sea-600);
+  color: var(--color-white);
+
+  &.active,
+  &:active {
+    background-color: var(--color-sea-700);
+  }
+
+  &:hover,
+  &.hover {
+    &:not(:active):not(.active) {
+      background-color: var(--color-sea-700);
+    }
+  }
+}
+
+.salmon {
+  background-color: var(--color-salmon-600);
+  color: var(--color-white);
+
+  &.active,
+  &:active {
+    background-color: var(--color-salmon-700);
+  }
+
+  &:hover,
+  &.hover {
+    &:not(:active):not(.active) {
+      background-color: var(--color-salmon-700);
+    }
+  }
+}
+
+.navy {
+  background-color: var(--color-navy-600);
+  color: var(--color-white);
+
+  &.active,
+  &:active {
+    background-color: var(--color-navy-700);
+  }
+
+  &:hover,
+  &.hover {
+    &:not(:active):not(.active) {
+      background-color: var(--color-navy-700);
+    }
+  }
+}

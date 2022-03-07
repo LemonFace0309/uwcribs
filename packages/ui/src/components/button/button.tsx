@@ -1,17 +1,36 @@
 import React from 'react';
 
+import cx from 'classnames';
+
+import styles from './button.module.scss';
+
 export type Props = {
   children: React.ReactNode;
-  variant?: 'sea' | 'salmon' | 'navy';
+  className?: string;
+  variant?: 'simple' | 'rounded' | 'outline' | 'nude';
+  color?: 'sea' | 'salmon' | 'navy';
 } & React.ComponentPropsWithoutRef<'button'>;
 
-export const Button = React.forwardRef<HTMLButtonElement, Props>(function Button(
-  { children, type = 'button', variant = 'sea', ...props },
-  ref,
-) {
-  return (
-    <button ref={ref} type={type} className={`bg-${variant}-600`} {...props}>
-      {children}
-    </button>
-  );
-});
+export const Button = React.forwardRef<HTMLButtonElement, Props>(
+  function Button(
+    {
+      children,
+      className,
+      type = 'button',
+      variant = 'simple',
+      color = 'sea',
+      ...props
+    },
+    ref
+  ) {
+    return (
+      <button
+        ref={ref}
+        type={type}
+        className={cx(className, styles.root, styles[variant], styles[color])}
+        {...props}>
+        {children}
+      </button>
+    );
+  }
+);
