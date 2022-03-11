@@ -37,7 +37,7 @@ export const Post: VFC<Props> = ({
   genderRestriction,
 }) => {
   return (
-    <Card className="flex space-x-4">
+    <Card className="flex max-w-3xl space-x-4">
       <img
         alt={`Image of ${type} at ${title}`}
         src={imageURL}
