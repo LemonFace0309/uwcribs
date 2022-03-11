@@ -2,5 +2,5 @@ const tailwindConfig = require('config/tailwind.config');
 
 module.exports = {
   ...tailwindConfig,
-  content: ['./**/*.{js,ts,jsx,tsx}'],
+  content: ['src/**/*.{js,ts,jsx,tsx}'],
 };
