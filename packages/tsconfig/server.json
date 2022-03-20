@@ -3,7 +3,7 @@
   "display": "Server",
   "extends": "./base.json",
   "compilerOptions": {
-    "target": "es6",
+    "target": "es5",
     "noEmit": false,
     "module": "commonjs",
     "sourceMap": true

@@ -7,6 +7,6 @@
       "@root/ui/*": ["../../packages/ui/src/*"]
     }
   },
-  "include": ["src/**/*", "next-env.d.ts", "styles/**/*.css"],
+  "include": ["src", "next-env.d.ts", "styles/**/*.css"],
   "exclude": ["node_modules"]
 }

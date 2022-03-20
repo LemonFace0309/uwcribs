@@ -5,12 +5,16 @@
   "scripts": {
     "test": "jest --coverage",
     "build": "tsc",
-    "dev": "rm -rf dist && yarn build && nodemon ./dist/src/index.js",
+    "dev": "nodemon",
     "start": "node ./dist/src/index.js",
     "lint": "eslint src --fix"
   },
   "dependencies": {
-    "express": "^4.17.3"
+    "apollo-server": "^3.6.4",
+    "apollo-server-core": "^3.6.4",
+    "apollo-server-express": "^3.6.4",
+    "express": "^4.17.3",
+    "graphql": "^16.3.0"
   },
   "devDependencies": {
     "@types/express": "^4.17.13",

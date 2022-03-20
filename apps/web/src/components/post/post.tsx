@@ -1,11 +1,9 @@
 /* eslint-disable @next/next/no-img-element */
 import { VFC } from 'react';
-import { FaBed } from 'react-icons/fa';
-import { GrFacebook } from 'react-icons/gr';
 
 import cx from 'classnames';
+import { FaBed } from 'react-icons/fa';
 
-import { Button } from '@root/ui/components';
 import { Card } from '@root/ui/components/card';
 import { Seperator } from '@root/ui/components/seperator';
 
