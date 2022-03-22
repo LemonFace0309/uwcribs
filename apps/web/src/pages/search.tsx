@@ -1,3 +1,5 @@
+import React from "react";
+
 import type { NextPage } from 'next';
 
 import { Post } from '@src/components/post';
@@ -9,7 +11,7 @@ const Search: NextPage = () => {
         type="Entire Rental Unit"
         title="Icon Apartment"
         description="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Amet felis, purus,  mauris in tellus dignissim nisl. At id tempus fermentum... more"
-        imageURL="https://cdn.spongebobwiki.org/thumb/3/32/Squidward%27s_house_Scavenger_Pants.png/1200px-Squidward%27s_house_Scavenger_Pants.png"
+        imageUrl="https://cdn.spongebobwiki.org/thumb/3/32/Squidward%27s_house_Scavenger_Pants.png/1200px-Squidward%27s_house_Scavenger_Pants.png"
         availableBeds={3}
         totalBeds={4}
         baths={3}

@@ -12,6 +12,9 @@ coverage
 .next/
 out/
 
+# generates
+__generated__
+
 # production
 build/
 

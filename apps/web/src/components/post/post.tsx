@@ -11,7 +11,7 @@ type Props = {
   type: 'Entire Rental Unit' | 'Shared Rental Unit';
   title: string;
   description: string;
-  imageURL: string;
+  imageUrl: string;
   availableBeds: number;
   totalBeds: number;
   baths: number;
@@ -25,7 +25,7 @@ export const Post: VFC<Props> = ({
   type,
   title,
   description,
-  imageURL,
+  imageUrl,
   availableBeds,
   totalBeds,
   baths,
@@ -38,7 +38,7 @@ export const Post: VFC<Props> = ({
     <Card className="flex flex-col items-center max-w-3xl md:flex-row space-y-4 md:space-y-0 md:space-x-4">
       <img
         alt={`Image of ${type} at ${title}`}
-        src={imageURL}
+        src={imageUrl}
         className="object-cover object-center w-full md:w-[300px] h-[216px]"
       />
       <div>

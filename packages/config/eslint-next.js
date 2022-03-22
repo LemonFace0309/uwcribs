@@ -31,7 +31,7 @@ module.exports = {
       {
         groups: [
           // React and Next come first
-          ['^(react|next)$'],
+          ['^(react|next)(/.*|$)'],
           // External packages.
           ['^@?\\w'],
           // Internal packages.

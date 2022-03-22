@@ -3,7 +3,12 @@ module.exports = {
     node: true,
   },
   plugins: ['@typescript-eslint', 'simple-import-sort'],
-  extends: ['eslint:recommended', 'plugin:import/recommended', 'plugin:import/typescript', 'prettier'],
+  extends: [
+    'eslint:recommended',
+    'plugin:import/recommended',
+    'plugin:import/typescript',
+    'prettier',
+  ],
   rules: {
     // eslint:recommended
     'no-console': ['warn', { allow: ['error'] }],
@@ -13,7 +18,25 @@ module.exports = {
 
     // simple-import-sort
     'simple-import-sort/exports': 'error',
-    'simple-import-sort/imports': 'error',
+    'simple-import-sort/imports': [
+      'error',
+      {
+        groups: [
+          // External packages.
+          ['^@?\\w'],
+          // Internal packages.
+          ['^(@|@src|@root)(/.*|$)'],
+          // Side effect imports.
+          ['^\\u0000'],
+          // Other relative imports. Put same-folder imports and `.` last.
+          ['^\\./(?=.*/)(?!/?$)', '^\\.(?!/?$)', '^\\./?$'],
+          // Parent imports. Put `..` last.
+          ['^\\.\\.(?!/?$)', '^\\.\\./?$'],
+          // Style imports.
+          ['^.+\\.s?css$'],
+        ],
+      },
+    ],
   },
   settings: {
     'import/parsers': {
@@ -26,7 +49,11 @@ module.exports = {
       },
       typescript: {
         alwaysTryTypes: true,
-        project: ['packages/*/tsconfig.json', 'apps/*/tsconfig.json', 'apps/*/tsconfig.lint.json'],
+        project: [
+          'packages/*/tsconfig.json',
+          'apps/*/tsconfig.json',
+          'apps/*/tsconfig.lint.json',
+        ],
       },
     },
   },
@@ -38,7 +65,10 @@ module.exports = {
       files: ['**/__tests__/**/*.[jt]s?(x)', '**/?(*.)+(spec|test).[jt]s?(x)'],
       extends: ['plugin:jest/recommended'],
       rules: {
-        'import/no-extraneous-dependencies': ['off', { devDependencies: ['**/?(*.)+(spec|test).[jt]s?(x)'] }],
+        'import/no-extraneous-dependencies': [
+          'off',
+          { devDependencies: ['**/?(*.)+(spec|test).[jt]s?(x)'] },
+        ],
         '@typescript-eslint/no-explicit-any': 'off',
       },
     },
@@ -61,5 +91,12 @@ module.exports = {
       },
     },
   ],
-  ignorePatterns: ['node_modules', 'dist', '.turbo', 'coverage', '__generated__/**/*', '**/*.d.ts'],
+  ignorePatterns: [
+    'node_modules',
+    'dist',
+    '.turbo',
+    'coverage',
+    '__generated__/**/*',
+    '**/*.d.ts',
+  ],
 };
