@@ -3,6 +3,7 @@ import { GenderRestriction, Post, PostType } from '@src/__generated__/graphql';
 export const posts: () => Post[] | null = () => {
   return [
     {
+      id: "1",
       type: PostType.EntireRentalUnit,
       title: 'Icon Apartment',
       description:

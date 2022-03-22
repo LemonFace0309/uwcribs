@@ -3,6 +3,7 @@ type Query {
 }
 
 type Post {
+  id: ID!
   type: PostType!
   title: String!
   description: String!
