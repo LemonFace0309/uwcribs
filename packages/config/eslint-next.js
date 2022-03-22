@@ -6,7 +6,12 @@ module.exports = {
     browser: true,
     node: true,
   },
-  plugins: ['@typescript-eslint', 'simple-import-sort', 'import-name'],
+  plugins: [
+    '@typescript-eslint',
+    'graphql',
+    'simple-import-sort',
+    'import-name',
+  ],
   extends: [
     'eslint:recommended',
     'plugin:react/recommended',
@@ -48,8 +53,6 @@ module.exports = {
       },
     ],
 
-    '@next/next/no-html-link-for-pages': 'off',
-
     'import-name/default-import-name': ['error', { classnames: 'cx' }],
 
     // react
@@ -73,6 +76,17 @@ module.exports = {
         namedComponents: 'arrow-function',
       },
     ],
+
+    // graphql
+    'graphql/template-strings': [
+      'error',
+      {
+        env: 'apollo',
+
+        // Import your schema JSON here
+        schemaJson: require('../../apps/server/graphql.schema.json'),
+      },
+    ],
   },
   settings: {
     next: {
@@ -88,7 +102,11 @@ module.exports = {
       },
       typescript: {
         alwaysTryTypes: true,
-        project: ['packages/*/tsconfig.json', 'apps/*/tsconfig.json', 'apps/*/tsconfig.lint.json'],
+        project: [
+          'packages/*/tsconfig.json',
+          'apps/*/tsconfig.json',
+          'apps/*/tsconfig.lint.json',
+        ],
       },
     },
   },
@@ -100,7 +118,10 @@ module.exports = {
       files: ['**/__tests__/**/*.[jt]s?(x)', '**/?(*.)+(spec|test).[jt]s?(x)'],
       extends: ['plugin:testing-library/react', 'plugin:jest/recommended'],
       rules: {
-        'import/no-extraneous-dependencies': ['off', { devDependencies: ['**/?(*.)+(spec|test).[jt]s?(x)'] }],
+        'import/no-extraneous-dependencies': [
+          'off',
+          { devDependencies: ['**/?(*.)+(spec|test).[jt]s?(x)'] },
+        ],
         '@typescript-eslint/no-explicit-any': 'off',
       },
     },
@@ -127,5 +148,13 @@ module.exports = {
       rules: { complexity: ['error', 16] },
     },
   ],
-  ignorePatterns: ['node_modules', '.next', 'public', '.turbo', 'coverage', '__generated__/**/*', '**/*.d.ts'],
+  ignorePatterns: [
+    'node_modules',
+    '.next',
+    'public',
+    '.turbo',
+    'coverage',
+    '__generated__/**/*',
+    '**/*.d.ts',
+  ],
 };
