@@ -1,19 +1,26 @@
-import type { AppProps } from 'next/app';
-import { SessionProvider } from 'next-auth/react';
+import type { AppProps } from "next/app";
 
-import { Layout } from '@src/components/layout';
+import { ApolloProvider } from "@apollo/client";
+import { SessionProvider } from "next-auth/react";
 
-import '@root/ui/styles/variables.scss';
-import 'styles/preflight.scss';
-import 'styles/globals.scss';
+import { Layout } from "@src/components/layout";
+import { useApollo } from "@src/lib/apollo-client";
+
+import "@root/ui/styles/variables.scss";
+import "styles/preflight.scss";
+import "styles/globals.scss";
 
 const MyApp = ({ Component, pageProps }: AppProps) => {
+  const apolloClient = useApollo(pageProps);
+
   return (
-    <SessionProvider session={pageProps.session}>
-      <Layout>
-        <Component {...pageProps} />
-      </Layout>
-    </SessionProvider>
+    <ApolloProvider client={apolloClient}>
+      <SessionProvider session={pageProps.session}>
+        <Layout>
+          <Component {...pageProps} />
+        </Layout>
+      </SessionProvider>
+    </ApolloProvider>
   );
 };
 

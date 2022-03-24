@@ -4,8 +4,8 @@ on:
   push:
     branches: [main]
     paths:
-      - 'apps/server/**'
-      - '.github/workflows/server.yaml'
+      - "apps/server/**"
+      - ".github/workflows/server.yaml"
   pull_request:
     branches: [main]
 

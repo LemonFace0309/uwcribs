@@ -1,6 +1,6 @@
-import type { NextPage } from 'next';
+import type { NextPage } from "next";
 
-import { Button } from '@root/ui/components';
+import { Button } from "@root/ui/components";
 
 const Home: NextPage = () => {
   return (

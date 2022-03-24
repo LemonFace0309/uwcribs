@@ -1,26 +1,26 @@
-import Link from 'next/link';
-import React from 'react';
+import Link from "next/link";
+import React from "react";
 
-import cx from 'classnames';
+import cx from "classnames";
 
-import styles from './button.module.scss';
+import styles from "./button.module.scss";
 
 export type Props = {
   children: React.ReactNode;
   className?: string;
-  variant?: 'simple' | 'rounded' | 'outline' | 'text';
-  color?: 'sea' | 'salmon' | 'navy';
+  variant?: "simple" | "rounded" | "outline" | "text";
+  color?: "sea" | "salmon" | "navy";
   href?: string;
-} & React.ComponentPropsWithoutRef<'button'>;
+} & React.ComponentPropsWithoutRef<"button">;
 
 export const Button = React.forwardRef<HTMLButtonElement, Props>(
   function Button(
     {
       children,
       className,
-      type = 'button',
-      variant = 'simple',
-      color = 'sea',
+      type = "button",
+      variant = "simple",
+      color = "sea",
       href,
       ...props
     },
@@ -42,7 +42,8 @@ export const Button = React.forwardRef<HTMLButtonElement, Props>(
         ref={ref}
         type={type}
         className={cx(className, styles.root, styles[variant], styles[color])}
-        {...props}>
+        {...props}
+      >
         {withChildren(children)}
       </button>
     );

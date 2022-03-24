@@ -1,0 +1,29 @@
+type Query {
+  posts: [Post!]!
+}
+
+type Post {
+  id: ID!
+  type: PostType!
+  title: String!
+  description: String!
+  imageUrl: String!
+  availableBeds: Int!
+  totalBeds: Int!
+  baths: Int!
+  amenities: [String!]!
+  ppp: Int!
+  fbLink: String!
+  genderRestriction: GenderRestriction!
+}
+
+enum PostType {
+  entireRentalUnit
+  sharedRentalUnit
+}
+
+enum GenderRestriction {
+  cooed
+  male
+  female
+}

@@ -1,7 +1,7 @@
 module.exports = {
-  ...require('config/eslint-next'),
+  extends: "../../packages/config/eslint-next",
   parserOptions: {
     tsconfigRootDir: __dirname,
-    project: './tsconfig.json',
+    project: "./tsconfig.json",
   },
 };

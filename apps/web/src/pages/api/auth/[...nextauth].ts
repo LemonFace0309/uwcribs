@@ -1,5 +1,5 @@
-import NextAuth from 'next-auth';
-import FacebookProvider from 'next-auth/providers/facebook';
+import NextAuth from "next-auth";
+import FacebookProvider from "next-auth/providers/facebook";
 
 export default NextAuth({
   providers: [
@@ -12,7 +12,7 @@ export default NextAuth({
     redirect({ url, baseUrl }) {
       if (url.startsWith(baseUrl)) return url;
       // Allows relative callback URLs
-      else if (url.startsWith('/')) return new URL(url, baseUrl).toString();
+      else if (url.startsWith("/")) return new URL(url, baseUrl).toString();
       return baseUrl;
     },
   },

@@ -1,5 +1,5 @@
 module.exports = {
-  ...require('config/jest-next'),
-  name: 'web',
-  displayName: 'Web Tests',
+  ...require("config/jest-next"),
+  name: "web",
+  displayName: "Web Tests",
 };

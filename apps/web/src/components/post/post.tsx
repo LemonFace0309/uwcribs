@@ -1,33 +1,21 @@
 /* eslint-disable @next/next/no-img-element */
-import { VFC } from 'react';
-import { FaBed } from 'react-icons/fa';
-import { GrFacebook } from 'react-icons/gr';
+import { VFC } from "react";
 
-import cx from 'classnames';
+import cx from "classnames";
+import { FaBed } from "react-icons/fa";
 
-import { Button } from '@root/ui/components';
-import { Card } from '@root/ui/components/card';
-import { Seperator } from '@root/ui/components/seperator';
+import { Card } from "@root/ui/components/card";
+import { Seperator } from "@root/ui/components/seperator";
+import { GetPostsQuery } from "@src/__generated__/graphql";
+import { Unwrap } from "@src/lib/types";
 
-type Props = {
-  type: 'Entire Rental Unit' | 'Shared Rental Unit';
-  title: string;
-  description: string;
-  imageURL: string;
-  availableBeds: number;
-  totalBeds: number;
-  baths: number;
-  amenities: string[];
-  ppp: number; // price per person
-  fbLink: string;
-  genderRestriction: 'Cooed' | 'Male' | 'Female';
-};
+type Props = Unwrap<GetPostsQuery["posts"]>;
 
 export const Post: VFC<Props> = ({
   type,
   title,
   description,
-  imageURL,
+  imageUrl,
   availableBeds,
   totalBeds,
   baths,
@@ -40,7 +28,7 @@ export const Post: VFC<Props> = ({
     <Card className="flex flex-col items-center max-w-3xl md:flex-row space-y-4 md:space-y-0 md:space-x-4">
       <img
         alt={`Image of ${type} at ${title}`}
-        src={imageURL}
+        src={imageUrl}
         className="object-cover object-center w-full md:w-[300px] h-[216px]"
       />
       <div>
@@ -51,15 +39,15 @@ export const Post: VFC<Props> = ({
           {Array.from(Array(totalBeds).keys()).map((i) => (
             <FaBed
               key={i}
-              className={cx('inline-block', {
-                'text-salmon-500': i + 1 <= availableBeds,
+              className={cx("inline-block", {
+                "text-salmon-500": i + 1 <= availableBeds,
               })}
             />
           ))}
         </div>
         <div>
           <p className="text-xs font-light">{`${availableBeds} beds • ${baths} baths`}</p>
-          <p className="text-xs font-light">{amenities.join(' • ')}</p>
+          <p className="text-xs font-light">{amenities.join(" • ")}</p>
         </div>
         <p className="my-4 text-xs font-light">{description}</p>
         <div className="flex space-between">
