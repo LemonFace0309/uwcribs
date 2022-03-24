@@ -6,20 +6,10 @@ import { FaBed } from 'react-icons/fa';
 
 import { Card } from '@root/ui/components/card';
 import { Seperator } from '@root/ui/components/seperator';
+import { GetPostsQuery } from '@src/__generated__/graphql';
+import { Unwrap } from '@src/lib/types';
 
-type Props = {
-  type: 'Entire Rental Unit' | 'Shared Rental Unit';
-  title: string;
-  description: string;
-  imageUrl: string;
-  availableBeds: number;
-  totalBeds: number;
-  baths: number;
-  amenities: string[];
-  ppp: number; // price per person
-  fbLink: string;
-  genderRestriction: 'Cooed' | 'Male' | 'Female';
-};
+type Props = Unwrap<GetPostsQuery['posts']>;
 
 export const Post: VFC<Props> = ({
   type,

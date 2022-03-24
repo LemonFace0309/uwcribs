@@ -1,0 +1,16 @@
+query GetPosts {
+  posts {
+    id
+    type
+    title
+    description
+    imageUrl
+    availableBeds
+    totalBeds
+    baths
+    amenities
+    ppp
+    fbLink
+    genderRestriction
+  }
+}
