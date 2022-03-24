@@ -8,9 +8,7 @@
     "start": "next start",
     "lint": "next lint",
     "test": "jest --coverage",
-    "codegen": "yarn download-schema && yarn codegen:generate",
-    "download-schema": "rover graph introspect http://localhost:8000/graphql > graphql.schema.json",
-    "codegen:generate": "apollo codegen:generate --localSchemaFile=../server/graphql.schema.json --target=typescript --tagName=gql"
+    "codegen": "graphql-codegen --require dotenv/config --config codegen.yml"
   },
   "dependencies": {
     "@apollo/client": "^3.5.9",
@@ -30,10 +28,13 @@
     "yup": "^0.32.11"
   },
   "devDependencies": {
-    "@types/graphql": "^14.5.0",
+    "@graphql-codegen/cli": "^2.6.2",
+    "@graphql-codegen/introspection": "2.1.1",
+    "@graphql-codegen/typescript": "^2.4.8",
+    "@graphql-codegen/typescript-operations": "^2.3.5",
+    "@graphql-codegen/typescript-react-apollo": "^3.2.11",
     "@types/node": "^17.0.12",
     "@types/react": "17.0.37",
-    "apollo": "^2.33.9",
     "autoprefixer": "^10.4.2",
     "config": "*",
     "eslint": "7.32.0",
