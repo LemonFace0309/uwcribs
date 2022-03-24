@@ -1,5 +1,6 @@
-import { signIn, signOut, useSession } from 'next-auth/react';
 import { VFC } from 'react';
+
+import { signIn, signOut, useSession } from 'next-auth/react';
 
 import { Button } from '@root/ui/components';
 
