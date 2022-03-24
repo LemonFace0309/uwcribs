@@ -1,5 +1,5 @@
-import Head from 'next/head';
-import { VFC } from 'react';
+import Head from "next/head";
+import { VFC } from "react";
 
 type Props = {
   title: string;

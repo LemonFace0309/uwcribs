@@ -1,21 +1,21 @@
 module.exports = {
-  extends: '../../packages/config/eslint-server',
+  extends: "../../packages/config/eslint-server",
   ignorePatterns: ["**/__generated__/*"],
   parserOptions: {
     tsconfigRootDir: __dirname,
-    project: './tsconfig.json',
+    project: "./tsconfig.lint.json",
   },
   overrides: [
     {
-      files: ['*.graphql'],
-      parser: '@graphql-eslint/eslint-plugin',
-      plugins: ['@graphql-eslint'],
+      files: ["*.graphql"],
+      parser: "@graphql-eslint/eslint-plugin",
+      plugins: ["@graphql-eslint"],
       rules: {
         // '@graphql-eslint/no-unreachable-types': 'error',
-        '@graphql-eslint/no-duplicate-fields': 'error',
+        "@graphql-eslint/no-duplicate-fields": "error",
       },
       parserOptions: {
-        schema: './src/apollo/schema.graphql',
+        schema: "./src/apollo/schema.graphql",
       },
     },
   ],

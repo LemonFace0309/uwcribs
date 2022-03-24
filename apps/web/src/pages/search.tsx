@@ -1,11 +1,10 @@
-import React from 'react';
+import React from "react";
 
-import type { NextPage } from 'next';
+import type { NextPage } from "next";
 
 import { GetPostsDocument } from "@src/__generated__/graphql";
-import { Posts } from '@src/components/posts';
-import { addApolloState, initializeApollo } from '@src/lib/apollo-client';
-
+import { Posts } from "@src/components/posts";
+import { addApolloState, initializeApollo } from "@src/lib/apollo-client";
 
 const Search: NextPage = () => {
   return (

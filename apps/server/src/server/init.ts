@@ -1,8 +1,8 @@
-import cors from 'cors';
-import express from 'express';
-import http from 'http';
+import cors from "cors";
+import express from "express";
+import http from "http";
 
-import { initApollo } from '@src/server/graphql';
+import { initApollo } from "@src/server/graphql";
 
 const port = 8000;
 
@@ -20,11 +20,11 @@ export const init = async () => {
   apollo.applyMiddleware({
     app,
     cors: CORS_OPTIONS,
-    path: '/graphql',
+    path: "/graphql",
   });
 
-  app.get('/', (_req, res) => {
-    res.send('Hello World! :)');
+  app.get("/", (_req, res) => {
+    res.send("Hello World! :)");
   });
 
   httpServer.listen(port, () => {

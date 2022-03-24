@@ -1,8 +1,8 @@
 /* eslint-disable @next/next/no-img-element */
-import { VFC } from 'react';
+import { VFC } from "react";
 
-import { useGetPostsQuery } from '@src/__generated__/graphql';
-import { Post } from '@src/components/post';
+import { useGetPostsQuery } from "@src/__generated__/graphql";
+import { Post } from "@src/components/post";
 
 export const Posts: VFC = () => {
   const { loading, error, data } = useGetPostsQuery();

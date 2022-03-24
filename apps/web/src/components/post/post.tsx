@@ -1,15 +1,15 @@
 /* eslint-disable @next/next/no-img-element */
-import { VFC } from 'react';
+import { VFC } from "react";
 
-import cx from 'classnames';
-import { FaBed } from 'react-icons/fa';
+import cx from "classnames";
+import { FaBed } from "react-icons/fa";
 
-import { Card } from '@root/ui/components/card';
-import { Seperator } from '@root/ui/components/seperator';
-import { GetPostsQuery } from '@src/__generated__/graphql';
-import { Unwrap } from '@src/lib/types';
+import { Card } from "@root/ui/components/card";
+import { Seperator } from "@root/ui/components/seperator";
+import { GetPostsQuery } from "@src/__generated__/graphql";
+import { Unwrap } from "@src/lib/types";
 
-type Props = Unwrap<GetPostsQuery['posts']>;
+type Props = Unwrap<GetPostsQuery["posts"]>;
 
 export const Post: VFC<Props> = ({
   type,
@@ -39,15 +39,15 @@ export const Post: VFC<Props> = ({
           {Array.from(Array(totalBeds).keys()).map((i) => (
             <FaBed
               key={i}
-              className={cx('inline-block', {
-                'text-salmon-500': i + 1 <= availableBeds,
+              className={cx("inline-block", {
+                "text-salmon-500": i + 1 <= availableBeds,
               })}
             />
           ))}
         </div>
         <div>
           <p className="text-xs font-light">{`${availableBeds} beds • ${baths} baths`}</p>
-          <p className="text-xs font-light">{amenities.join(' • ')}</p>
+          <p className="text-xs font-light">{amenities.join(" • ")}</p>
         </div>
         <p className="my-4 text-xs font-light">{description}</p>
         <div className="flex space-between">
