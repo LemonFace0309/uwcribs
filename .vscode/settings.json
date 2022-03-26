@@ -2,6 +2,7 @@
   "editor.codeActionsOnSave": {
     "source.fixAll": true
   },
+  "editor.bracketPairColorization.enabled": true,
   "eslint.validate": [
     "javascript",
     "javascriptreact",
