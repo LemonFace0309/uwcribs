@@ -1,5 +1,5 @@
 overwrite: true
-schema: "http://localhost:8000/graphql"
+schema: "./src/apollo/schema.graphql"
 documents: null
 generates:
   src/__generated__/graphql.ts:
