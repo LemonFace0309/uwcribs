@@ -2,7 +2,6 @@
   "name": "root",
   "version": "0.0.0",
   "engines": {
-    "yarn": ">=1.0.0",
     "node": "^14.x"
   },
   "private": true,
@@ -44,5 +43,5 @@
       "prettier --write"
     ]
   },
-  "packageManager": "yarn@1.22.17"
+  "packageManager": "yarn@1.22.1"
 }
