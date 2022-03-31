@@ -7,8 +7,8 @@ import { Layout } from "@src/components/layout";
 import { useApollo } from "@src/lib/apollo-client";
 
 import "@root/ui/styles/variables.scss";
-import "styles/preflight.scss";
-import "styles/globals.scss";
+import "@src/styles/preflight.scss";
+import "@src/styles/globals.scss";
 
 const MyApp = ({ Component, pageProps }: AppProps) => {
   const apolloClient = useApollo(pageProps);

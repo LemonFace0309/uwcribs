@@ -1,0 +1,12 @@
+.postsContainer {
+  margin: 0px auto;
+  display: grid;
+  grid-gap: 8px 16px;
+  align-content: flex-start;
+}
+
+@media (min-width: 1536px) {
+  .postsContainer {
+    grid-template-columns: 1fr 1fr;
+  }
+}
