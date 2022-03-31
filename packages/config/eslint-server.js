@@ -2,16 +2,18 @@ module.exports = {
   env: {
     node: true,
   },
-  plugins: ["@typescript-eslint", "simple-import-sort"],
+  plugins: ["@typescript-eslint", "simple-import-sort", "prettier"],
   extends: [
     "eslint:recommended",
     "plugin:import/recommended",
     "plugin:import/typescript",
-    "prettier",
   ],
   rules: {
     // eslint:recommended
     "no-console": ["warn", { allow: ["error"] }],
+
+    // eslint-plugin-prettier
+    "prettier/prettier": "error",
 
     // plugin:import
     "import/named": "off",

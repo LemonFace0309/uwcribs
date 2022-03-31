@@ -11,6 +11,7 @@ module.exports = {
     "graphql",
     "simple-import-sort",
     "import-name",
+    'prettier',
   ],
   extends: [
     "eslint:recommended",
@@ -18,11 +19,13 @@ module.exports = {
     "plugin:tailwind/recommended",
     "plugin:import/typescript",
     "next",
-    "prettier",
   ],
   rules: {
     // eslint:recommended
     "no-console": ["warn", { allow: ["error"] }],
+
+    // eslint-plugin-prettier
+    "prettier/prettier": "error",
 
     // simple-import-sort
     "simple-import-sort/exports": "error",
