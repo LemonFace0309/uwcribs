@@ -14,10 +14,8 @@ module.exports = {
   ],
   extends: [
     "eslint:recommended",
-    "plugin:react/recommended",
     "plugin:react-hooks/recommended",
     "plugin:tailwind/recommended",
-    "plugin:import/recommended",
     "plugin:import/typescript",
     "next",
     "prettier",
@@ -25,9 +23,6 @@ module.exports = {
   rules: {
     // eslint:recommended
     "no-console": ["warn", { allow: ["error"] }],
-
-    // plugin:import
-    "import/named": "off",
 
     // simple-import-sort
     "simple-import-sort/exports": "error",
