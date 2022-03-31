@@ -2,7 +2,7 @@ import cors from "cors";
 import express from "express";
 import http from "http";
 
-import { attachConnections, initConnections } from "@src/server/connections";
+import { attachContext, initContext } from "@src/server/context";
 import { initApollo } from "@src/server/graphql";
 
 const port = 8000;
@@ -13,10 +13,11 @@ const CORS_OPTIONS: cors.CorsOptions = {
 
 export const init = async () => {
   const app = express();
-  const connections = initConnections();
+  const connections = initContext();
 
   app.use(cors(CORS_OPTIONS));
   const httpServer = http.createServer(app);
+  app.use(attachContext(connections));
 
   const apollo = initApollo(httpServer);
   await apollo.start();
@@ -25,8 +26,6 @@ export const init = async () => {
     cors: CORS_OPTIONS,
     path: "/graphql",
   });
-
-  app.use(attachConnections(connections));
 
   app.get("/", (_req, res) => {
     res.send("Hello World! :)");

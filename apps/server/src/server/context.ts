@@ -1,16 +1,16 @@
 import { PrismaClient } from "@prisma/client";
 import { NextFunction, Request, Response } from "express";
 
-export const initConnections = () => {
+export type Context = ReturnType<typeof initContext>;
+
+export const initContext = () => {
   const prisma = new PrismaClient();
   return { prisma };
 };
 
-export const attachConnections = (
-  connections: ReturnType<typeof initConnections>
-) => {
+export const attachContext = (context: Context) => {
   return (req: Request, _res: Response, next: NextFunction) => {
-    req.ctx = connections;
+    req.ctx = context;
     next();
   };
 };

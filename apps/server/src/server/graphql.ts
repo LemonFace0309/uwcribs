@@ -9,6 +9,9 @@ export const initApollo = (httpServer: http.Server): ApolloServer => {
   const server = new ApolloServer({
     typeDefs,
     resolvers,
+    context: ({ req }) => {
+      return req.ctx;
+    },
     plugins: [ApolloServerPluginDrainHttpServer({ httpServer })],
   });
   return server;
