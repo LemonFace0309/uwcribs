@@ -7,7 +7,7 @@ import { Nav } from "./nav";
  */
 export const Layout: FC = ({ children }) => {
   return (
-    <div className="flex flex-col w-screen min-h-screen">
+    <div className="flex flex-col min-h-screen max-w-screen">
       <Nav />
       <main className="flex items-stretch flex-grow">{children}</main>
       <footer>Footer</footer>

@@ -2,12 +2,15 @@
 import { VFC } from "react";
 
 import cx from "classnames";
+import startCase from "lodash/startCase";
 import { FaBed } from "react-icons/fa";
+import { GrFacebook } from "react-icons/gr";
 
-import { Card } from "@root/ui/components/card";
-import { Seperator } from "@root/ui/components/seperator";
+import { Button, Card, Seperator } from "@root/ui/components";
 import { GetPostsQuery } from "@src/__generated__/graphql";
 import { Unwrap } from "@src/lib/types";
+
+import { Ribbon } from "./ribbon";
 
 type Props = Unwrap<GetPostsQuery["posts"]>;
 
@@ -26,13 +29,17 @@ export const Post: VFC<Props> = ({
 }) => {
   return (
     <Card className="flex flex-col items-center max-w-3xl md:flex-row space-y-4 md:space-y-0 md:space-x-4">
-      <img
-        alt={`Image of ${type} at ${title}`}
-        src={imageUrl}
-        className="object-cover object-center w-full md:w-[300px] h-[216px]"
-      />
+      <div className="relative w-full overflow-hidden rounded-xl shrink-0 md:w-[300px] h-[216px]">
+        <Ribbon>{genderRestriction}</Ribbon>
+        <img
+          alt={`Image of ${startCase(type)} at ${title}`}
+          src={imageUrl}
+          className="object-cover object-center w-full h-full"
+        />
+      </div>
+
       <div>
-        <p className="text-xs font-extralight">{type}</p>
+        <p className="text-xs font-extralight">{startCase(type)}</p>
         <h1 className="text-xl">{title}</h1>
         <Seperator className="my-2" />
         <div className="mb-2 space-x-2">
@@ -50,11 +57,12 @@ export const Post: VFC<Props> = ({
           <p className="text-xs font-light">{amenities.join(" • ")}</p>
         </div>
         <p className="my-4 text-xs font-light">{description}</p>
-        <div className="flex space-between">
+        <div className="flex items-center justify-between">
           <p className="text-xl font-bold">{`$${ppp}/month per person`}</p>
-          {/* <Button variant="outline" color="sea">
-            <GrFacebook className="inline-block mr-1" />Contact Seller
-          </Button> */}
+          <Button variant="rounded-outline" color="sea" size="sm">
+            <GrFacebook className="inline-block mr-1" size="16px" />
+            <p className="inline text-xs">Contact Seller</p>
+          </Button>
         </div>
       </div>
     </Card>

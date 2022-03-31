@@ -8,8 +8,9 @@ import styles from "./button.module.scss";
 export type Props = {
   children: React.ReactNode;
   className?: string;
-  variant?: "simple" | "rounded" | "outline" | "text";
+  variant?: "simple" | "rounded" | "outline" | "rounded-outline" | "text";
   color?: "sea" | "salmon" | "navy";
+  size?: "sm" | "md" | "lg";
   href?: string;
 } & React.ComponentPropsWithoutRef<"button">;
 
@@ -21,6 +22,7 @@ export const Button = React.forwardRef<HTMLButtonElement, Props>(
       type = "button",
       variant = "simple",
       color = "sea",
+      size = "md",
       href,
       ...props
     },
@@ -41,9 +43,14 @@ export const Button = React.forwardRef<HTMLButtonElement, Props>(
       <button
         ref={ref}
         type={type}
-        className={cx(className, styles.root, styles[variant], styles[color])}
-        {...props}
-      >
+        className={cx(
+          className,
+          styles.root,
+          styles[variant],
+          styles[color],
+          styles[size]
+        )}
+        {...props}>
         {withChildren(children)}
       </button>
     );

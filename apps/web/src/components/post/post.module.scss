@@ -1,0 +1,17 @@
+.ribbon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  color: white;
+  width: 150px;
+  left: -45px;
+  top: 20px;
+  background: linear-gradient(
+    89.9deg,
+    #ff9a8d 0.07%,
+    #ff9a8d 0.08%,
+    #aed6dc 56.05%
+  );
+  transform: rotate(-45deg);
+}
