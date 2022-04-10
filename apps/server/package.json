@@ -4,7 +4,7 @@
   "license": "MIT",
   "scripts": {
     "test": "jest --coverage",
-    "build": "yarn clean && tsc --project tsconfig.json && tscpaths -p tsconfig.json -s ./ -o ./dist && copyfiles *.graphql dist/ && yarn copyfiles:graphql",
+    "build": "yarn clean && tsc --project tsconfig.json && tscpaths -p tsconfig.json -s ./ -o ./dist && yarn copyfiles:graphql",
     "copyfiles:graphql": "copyfiles -V src/**/*.graphql dist/",
     "clean": "rm -rf dist",
     "dev": "nodemon",
