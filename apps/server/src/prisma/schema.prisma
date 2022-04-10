@@ -12,7 +12,7 @@ datasource db {
 }
 
 model Post {
-  id                String   @id @default(auto()) @map("_id") @db.ObjectId
+  id                String            @id @default(auto()) @map("_id") @db.ObjectId
   type              PostType
   title             String
   description       String
@@ -24,6 +24,10 @@ model Post {
   ppp               Int
   fbLink            String
   genderRestriction GenderRestriction
+  author            String
+  confirmed         Boolean
+  text              String
+  groupId           String            @db.ObjectId
 }
 
 enum PostType {
