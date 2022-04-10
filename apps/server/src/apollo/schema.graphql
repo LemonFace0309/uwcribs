@@ -15,6 +15,11 @@ type Post {
   ppp: Int!
   fbLink: String!
   genderRestriction: GenderRestriction!
+  flagged: Boolean!
+  confirmed: Boolean!
+  author: String!
+  text: String!
+  groupId: ID!
 }
 
 enum PostType {

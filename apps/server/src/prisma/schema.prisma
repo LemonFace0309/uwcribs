@@ -13,7 +13,7 @@ datasource db {
 
 model Post {
   id                String   @id @default(auto()) @map("_id") @db.ObjectId
-  type              String   @unique
+  type              PostType
   title             String
   description       String
   imageUrl          String
@@ -23,5 +23,16 @@ model Post {
   amenities         String[]
   ppp               Int
   fbLink            String
-  genderRestriction String
+  genderRestriction GenderRestriction
+}
+
+enum PostType {
+  entireRentalUnit
+  sharedRentalUnit
+}
+
+enum GenderRestriction {
+  cooed
+  male
+  female
 }

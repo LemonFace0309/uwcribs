@@ -29,6 +29,9 @@ jobs:
           node-version: ${{ matrix.node-version }}
       - name: Install dependencies
         run: yarn install --frozen-lockfile
+      - name: Codegen
+        working-directory: ./apps/server
+        run: yarn codegen
       - name: Build
         working-directory: ./apps/server
         run: yarn build
