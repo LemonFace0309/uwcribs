@@ -1,0 +1,27 @@
+{
+  "name": "selenium-scraper",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest --coverage",
+    "dev": "nodemon --ignore ./classifier/ -r esm index.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^16.0.0",
+    "esm": "^3.2.25",
+    "express": "^4.17.2",
+    "mongoose": "^6.2.3",
+    "natural": "^5.1.13",
+    "node-nlp": "^4.23.2",
+    "selenium-webdriver": "^4.1.1",
+    "testim": "^3.223.0"
+  },
+  "devDependencies": {
+    "eslint": "^8.9.0",
+    "nodemon": "^2.0.15",
+    "prettier": "^2.5.1"
+  }
+}
