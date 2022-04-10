@@ -66,8 +66,7 @@ const shouldBeFlagged = (mappedEntities) => {
 
 const filterEntities = (post, entityType, minAccuracy) => {
   return post.entities.filter(
-    ({ entity, accuracy }) =>
-      entity.type === entityType && accuracy >= minAccuracy
+    ({ entity, accuracy }) => entity === entityType && accuracy >= minAccuracy
   );
 };
 
@@ -84,6 +83,9 @@ export const logEntities = async () => {
             post.text.replace("\n", " ").toLocaleLowerCase()
           )
           .then((p) => {
+            if (post._doc.confirmed) {
+              return post._doc;
+            }
             let flagged = false;
             let bathrooms;
             let bedrooms;
@@ -99,8 +101,9 @@ export const logEntities = async () => {
 
             return {
               ...post._doc,
-              bedrooms,
-              bathrooms,
+              availableBeds: bedrooms,
+              totalBeds: bedrooms,
+              baths: bathrooms,
               flagged,
             };
           });
