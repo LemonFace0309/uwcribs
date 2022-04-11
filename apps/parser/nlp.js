@@ -49,10 +49,12 @@ const defineCategories = () => {
   });
 };
 
-const getNumRooms = (mappedEntities, roomType) => {
-  if (mappedEntities[roomType].length) {
-    return mappedEntities[roomType].sort((a, b) => b.accuracy - a.accuracy)[0]
-      .option;
+const getPostFieldValue = (mappedEntities, field) => {
+  if (mappedEntities[field].length) {
+    return getValueFromEntity(
+      mappedEntities[field].sort((a, b) => b.accuracy - a.accuracy)[0],
+      field
+    );
   }
   return undefined;
 };
@@ -60,7 +62,8 @@ const getNumRooms = (mappedEntities, roomType) => {
 const shouldBeFlagged = (mappedEntities) => {
   return (
     mappedEntities.bedrooms.length !== 1 ||
-    mappedEntities.bathrooms.length !== 1
+    mappedEntities.bathrooms.length !== 1 ||
+    mappedEntities.ppp.length !== 1
   );
 };
 
@@ -68,6 +71,15 @@ const filterEntities = (post, entityType, minAccuracy) => {
   return post.entities.filter(
     ({ entity, accuracy }) => entity === entityType && accuracy >= minAccuracy
   );
+};
+
+const getValueFromEntity = (entity, type) => {
+  switch (type) {
+    case "ppp":
+      return entity.resolution.value;
+    default:
+      return entity.option;
+  }
 };
 
 export const logEntities = async () => {
@@ -89,21 +101,25 @@ export const logEntities = async () => {
             let flagged = false;
             let bathrooms;
             let bedrooms;
+            let ppp;
 
             const mappedEntities = {
               bathrooms: filterEntities(p, "bathrooms", 0.9),
               bedrooms: filterEntities(p, "bedrooms", 0.9),
+              ppp: filterEntities(p, "currency", 0.9),
             };
 
             flagged = shouldBeFlagged(mappedEntities);
-            bedrooms = getNumRooms(mappedEntities, "bedrooms");
-            bathrooms = getNumRooms(mappedEntities, "bathrooms");
+            bedrooms = getPostFieldValue(mappedEntities, "bedrooms");
+            bathrooms = getPostFieldValue(mappedEntities, "bathrooms");
+            ppp = getPostFieldValue(mappedEntities, "ppp");
 
             return {
               ...post._doc,
               availableBeds: bedrooms,
               totalBeds: bedrooms,
               baths: bathrooms,
+              ppp,
               flagged,
             };
           });
