@@ -47,6 +47,20 @@ const defineCategories = () => {
       ]
     );
   });
+
+  manager.addNamedEntityText(
+    "genderRestriction",
+    "male",
+    ["en"],
+    [" male only", " men only", " male unit", "all male"]
+  );
+
+  manager.addNamedEntityText(
+    "genderRestriction",
+    "female",
+    ["en"],
+    [" female only", " girls only", " female unit", "girls unit", "all female"]
+  );
 };
 
 const getPostFieldValue = (mappedEntities, field) => {
@@ -102,17 +116,23 @@ export const logEntities = async () => {
             let bathrooms;
             let bedrooms;
             let ppp;
+            let genderRestriction;
 
             const mappedEntities = {
               bathrooms: filterEntities(p, "bathrooms", 0.9),
               bedrooms: filterEntities(p, "bedrooms", 0.9),
               ppp: filterEntities(p, "currency", 0.9),
+              genderRestriction: filterEntities(p, "genderRestriction", 0.9),
             };
 
             flagged = shouldBeFlagged(mappedEntities);
             bedrooms = getPostFieldValue(mappedEntities, "bedrooms");
             bathrooms = getPostFieldValue(mappedEntities, "bathrooms");
             ppp = getPostFieldValue(mappedEntities, "ppp");
+            genderRestriction = getPostFieldValue(
+              mappedEntities,
+              "genderRestriction"
+            );
 
             return {
               ...post._doc,
@@ -120,6 +140,7 @@ export const logEntities = async () => {
               totalBeds: bedrooms,
               baths: bathrooms,
               ppp,
+              genderRestriction: genderRestriction || "coed",
               flagged,
             };
           });
