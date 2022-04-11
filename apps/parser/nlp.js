@@ -77,7 +77,8 @@ const shouldBeFlagged = (mappedEntities) => {
   return (
     mappedEntities.bedrooms.length !== 1 ||
     mappedEntities.bathrooms.length !== 1 ||
-    mappedEntities.ppp.length !== 1
+    mappedEntities.ppp.length !== 1 ||
+    mappedEntities.genderRestriction.length !== 1
   );
 };
 
