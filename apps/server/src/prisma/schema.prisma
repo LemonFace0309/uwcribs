@@ -28,6 +28,7 @@ model Post {
   confirmed         Boolean
   text              String
   groupId           String            @db.ObjectId
+  flagged           Boolean
 }
 
 enum PostType {
@@ -36,7 +37,7 @@ enum PostType {
 }
 
 enum GenderRestriction {
-  cooed
+  coed
   male
   female
 }

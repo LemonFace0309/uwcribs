@@ -33,14 +33,17 @@ export const Post: VFC<Props> = ({
         <Ribbon>{genderRestriction}</Ribbon>
         <img
           alt={`Image of ${startCase(type)} at ${title}`}
-          src={imageUrl}
+          src={
+            imageUrl ||
+            "https://cdn.spongebobwiki.org/thumb/3/32/Squidward%27s_house_Scavenger_Pants.png/1200px-Squidward%27s_house_Scavenger_Pants.png"
+          }
           className="object-cover object-center w-full h-full"
         />
       </div>
 
       <div>
         <p className="text-xs font-extralight">{startCase(type)}</p>
-        <h1 className="text-xl">{title}</h1>
+        <h1 className="text-xl">{title || "Icon Apartment"}</h1>
         <Seperator className="my-2" />
         <div className="mb-2 space-x-2">
           {Array.from(Array(totalBeds).keys()).map((i) => (
@@ -59,7 +62,11 @@ export const Post: VFC<Props> = ({
         <p className="my-4 text-xs font-light">{description}</p>
         <div className="flex items-center justify-between">
           <p className="text-xl font-bold">{`$${ppp}/month per person`}</p>
-          <Button variant="rounded-outline" color="sea" size="sm">
+          <Button
+            variant="rounded-outline"
+            color="sea"
+            size="sm"
+            onClick={() => window.open(fbLink, "_blank")}>
             <GrFacebook className="inline-block mr-1" size="16px" />
             <p className="inline text-xs">Contact Seller</p>
           </Button>

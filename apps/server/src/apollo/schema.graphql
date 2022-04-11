@@ -28,7 +28,7 @@ enum PostType {
 }
 
 enum GenderRestriction {
-  cooed
+  coed
   male
   female
 }
