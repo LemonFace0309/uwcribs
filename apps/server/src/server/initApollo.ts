@@ -2,13 +2,11 @@ import { ApolloServerPluginDrainHttpServer } from "apollo-server-core";
 import { ApolloServer } from "apollo-server-express";
 import http from "http";
 
-import * as resolvers from "@src/apollo/resolvers";
-import typeDefs from "@src/apollo/typeDefs";
+import { schema } from "@src/server/schema";
 
 export const initApollo = (httpServer: http.Server): ApolloServer => {
   const server = new ApolloServer({
-    typeDefs,
-    resolvers,
+    schema,
     context: ({ req }) => {
       return req.ctx;
     },

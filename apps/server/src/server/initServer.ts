@@ -3,7 +3,7 @@ import express from "express";
 import http from "http";
 
 import { attachContext, initContext } from "@src/server/context";
-import { initApollo } from "@src/server/graphql";
+import { initApollo } from "@src/server/initApollo";
 
 const port = 8000;
 
@@ -11,7 +11,7 @@ const CORS_OPTIONS: cors.CorsOptions = {
   credentials: true,
 };
 
-export const init = async () => {
+export const initServer = async () => {
   const app = express();
   const connections = initContext();
 

@@ -1,12 +1,17 @@
 overwrite: true
 schema: "./src/apollo/schema.graphql"
-documents: null
+documents: "src/**/*.{gql,graphql}"
 generates:
   src/__generated__/graphql.ts:
     plugins:
       - "typescript"
       - "typescript-resolvers"
       - "typescript-mongodb"
+  src/__generated__/operations.ts:
+    plugins:
+      - "typescript"
+      - "typescript-operations"
+      - "typescript-react-apollo"
   ./graphql.schema.json:
     plugins:
       - "introspection"
