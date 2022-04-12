@@ -11,7 +11,8 @@
     "start": "node -r tsconfig-paths/register -r ts-node ./dist/src",
     "lint": "eslint src --fix",
     "codegen": "graphql-codegen --config codegen.yml",
-    "prisma:generate": "prisma generate --schema ./src/prisma/schema.prisma"
+    "prisma:generate": "prisma generate --schema ./src/prisma/schema.prisma",
+    "es:reindex": "ts-node -r tsconfig-paths/register ./src/elastic/index.ts"
   },
   "dependencies": {
     "@apollo/client": "^3.5.10",
