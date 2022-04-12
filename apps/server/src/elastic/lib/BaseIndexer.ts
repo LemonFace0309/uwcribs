@@ -3,22 +3,23 @@ import { Client as ElasticCLient } from "@elastic/elasticsearch";
 import { ISource } from "@src/elastic/lib/ISource";
 import { BulkOperation, BulkResponse } from "@src/elastic/lib/types";
 import { batch } from "@src/elastic/lib/utils";
+import { Context } from "@src/server/context";
 
 export type BaseIndexerParams<Doc extends { id: unknown }> = {
-  elastic: ElasticCLient;
+  ctx: Context;
   source: ISource<Doc>;
   index: string;
 };
 
 const BATCH_SIZE = 200;
 
-export default class BaseIndexer<Doc extends { id: unknown }> {
+export class BaseIndexer<Doc extends { id: unknown }> {
   elastic: ElasticCLient;
   source: ISource<Doc>;
   index: string;
 
-  constructor({ elastic, source, index }: BaseIndexerParams<Doc>) {
-    this.elastic = elastic;
+  constructor({ ctx, source, index }: BaseIndexerParams<Doc>) {
+    this.elastic = ctx.elastic;
     this.source = source;
     this.index = index;
   }
@@ -30,7 +31,7 @@ export default class BaseIndexer<Doc extends { id: unknown }> {
     this.deleteIndex();
 
     this.log("Reindexing all docs");
-    const docs = this.source.collect();
+    const docs = await this.source.collect();
     for await (const chunk of batch(docs, BATCH_SIZE)) {
       await this.bulk("index", chunk);
     }
@@ -56,12 +57,14 @@ export default class BaseIndexer<Doc extends { id: unknown }> {
       body.push({ ...doc });
     }
 
+    // wait_for is important, without it won't be able to delete old records.
+    // See: https://www.elastic.co/guide/en/elasticsearch/reference/current/docs-delete-by-query.html#docs-delete-by-query-api-desc
     const res = await elastic.bulk({
       body,
       refresh: "wait_for",
     });
 
-    console.log(res);
+    this.log(`Bulk index took ${res.took}ms to finish`);
   }
 
   protected log(msg: string) {

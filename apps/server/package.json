@@ -14,6 +14,7 @@
     "prisma:generate": "prisma generate --schema ./src/prisma/schema.prisma"
   },
   "dependencies": {
+    "@apollo/client": "^3.5.10",
     "@elastic/elasticsearch": "^8.1.0",
     "@prisma/client": "^3.11.1",
     "apollo-server": "^3.6.4",
@@ -29,6 +30,8 @@
     "@graphql-codegen/introspection": "2.1.1",
     "@graphql-codegen/typescript": "2.4.8",
     "@graphql-codegen/typescript-mongodb": "2.3.6",
+    "@graphql-codegen/typescript-operations": "^2.3.5",
+    "@graphql-codegen/typescript-react-apollo": "^3.2.11",
     "@graphql-codegen/typescript-resolvers": "2.6.1",
     "@graphql-eslint/eslint-plugin": "^3.9.1",
     "@types/express": "^4.17.13",

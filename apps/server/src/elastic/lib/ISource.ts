@@ -1,7 +1,15 @@
+import { Context } from "@src/server/context";
+
 /**
  * Source of records for Elastic.
  *
  */
-export interface ISource<T extends { id: unknown }> {
-  collect(): AsyncGenerator<T, void, undefined>;
+export abstract class ISource<T extends { id: unknown }> {
+  ctx: Context;
+
+  constructor(ctx: Context) {
+    this.ctx = ctx;
+  }
+
+  abstract collect(): Promise<T[]>;
 }
