@@ -1,5 +1,9 @@
 type Query {
-  posts: [Post!]!
+  posts(options: PostOptions): [Post!]!
+}
+
+input PostOptions {
+  beds: Int!
 }
 
 type Post {
