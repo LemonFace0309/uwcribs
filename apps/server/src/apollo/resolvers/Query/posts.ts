@@ -6,12 +6,12 @@ export const posts = async (
   args: QueryPostsArgs,
   ctx: Context
 ) => {
-  if (args.options && args.options.beds) {
+  if (args.options && args.options.availableBeds) {
     const res = await ctx.elastic.search({
       index: "posts_v1",
       query: {
         match: {
-          availableBeds: args.options.beds,
+          availableBeds: args.options.availableBeds,
         },
       },
     });
@@ -20,7 +20,8 @@ export const posts = async (
 
   return await ctx.prisma.post.findMany({
     where: {
-      flagged: false,
+      // flagged: false,
+      confirmed: true,
     },
     orderBy: {
       id: "desc",

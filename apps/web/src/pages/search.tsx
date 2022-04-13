@@ -26,7 +26,7 @@ export const getServerSideProps: GetServerSideProps = async (req) => {
   if (req.query.beds && typeof req.query.beds === "string") {
     variables = {
       options: {
-        beds: parseInt(req.query.beds),
+        availableBeds: parseInt(req.query.beds),
       },
     };
   }

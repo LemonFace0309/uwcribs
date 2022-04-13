@@ -17,7 +17,7 @@ export const Posts: VFC = () => {
   if (beds && typeof beds === "string") {
     variables = {
       options: {
-        beds: parseInt(beds),
+        availableBeds: parseInt(beds),
       },
     };
   }
