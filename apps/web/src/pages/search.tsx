@@ -8,13 +8,17 @@ import {
   GetPostsQueryVariables,
 } from "@src/__generated__/graphql";
 import { Posts } from "@src/components/posts";
+import { Filter } from "@src/components/search/filter";
 import { addApolloState, initializeApollo } from "@src/lib/apollo-client";
 import styles from "@src/styles/pages/search.module.scss";
 
 const Search: NextPage = () => {
   return (
-    <div className={styles.postsContainer}>
-      <Posts />
+    <div className={styles.root}>
+      <Filter />
+      <div className={styles.postsContainer}>
+        <Posts />
+      </div>
     </div>
   );
 };
