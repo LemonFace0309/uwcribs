@@ -1,3 +1,7 @@
 import { initServer } from "@src/server/initServer";
 
-initServer();
+try {
+  initServer();
+} catch (err) {
+  console.error(err);
+}
