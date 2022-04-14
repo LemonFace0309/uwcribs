@@ -1,0 +1,1 @@
+web: yarn codegen && yarn build && cd apps/server && yarn start
