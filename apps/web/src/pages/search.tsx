@@ -23,21 +23,25 @@ const Search: NextPage = () => {
   );
 };
 
-export const getServerSideProps: GetServerSideProps = async (req) => {
+export const getServerSideProps: GetServerSideProps = async (ctx) => {
+  console.time("ssr");
   const apolloClient = initializeApollo();
+  console.timeLog("ssr");
 
   let variables: GetPostsQueryVariables = {};
-  if (req.query.beds && typeof req.query.beds === "string") {
+  if (ctx.query.beds && typeof ctx.query.beds === "string") {
     variables = {
       options: {
-        availableBeds: parseInt(req.query.beds),
+        availableBeds: parseInt(ctx.query.beds),
       },
     };
   }
+  console.timeLog("ssr");
   await apolloClient.query<GetPostsQuery, GetPostsQueryVariables>({
     query: GetPostsDocument,
     variables,
   });
+  console.timeEnd("ssr");
 
   return addApolloState(apolloClient, {
     props: {},
