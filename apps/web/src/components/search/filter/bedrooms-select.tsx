@@ -20,7 +20,8 @@ export const BedroomsSelect: VFC = () => {
     }
 
     router.push(`/search?beds=${selected.value}`);
-  }, [router, selected]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [selected]);
 
   return (
     <div className="inline-block mx-2 w-36">
