@@ -37,7 +37,7 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
     };
   }
   console.timeLog("ssr");
-  await apolloClient.query<GetPostsQuery, GetPostsQueryVariables>({
+  apolloClient.query<GetPostsQuery, GetPostsQueryVariables>({
     query: GetPostsDocument,
     variables,
   });
