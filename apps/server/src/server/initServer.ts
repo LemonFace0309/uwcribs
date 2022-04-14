@@ -5,7 +5,7 @@ import http from "http";
 import { attachContext, initContext } from "@src/server/context";
 import { initApollo } from "@src/server/initApollo";
 
-const port = 8000;
+const port = process.env.PORT ?? 8000;
 
 const CORS_OPTIONS: cors.CorsOptions = {
   credentials: true,
