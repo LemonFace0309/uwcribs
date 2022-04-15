@@ -24,9 +24,7 @@ const Search: NextPage = () => {
 };
 
 export const getServerSideProps: GetServerSideProps = async (ctx) => {
-  console.time("ssr");
   const apolloClient = initializeApollo();
-  console.timeLog("ssr");
 
   let variables: GetPostsQueryVariables = {};
   if (ctx.query.beds && typeof ctx.query.beds === "string") {
@@ -36,12 +34,10 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
       },
     };
   }
-  console.timeLog("ssr");
-  apolloClient.query<GetPostsQuery, GetPostsQueryVariables>({
+  await apolloClient.query<GetPostsQuery, GetPostsQueryVariables>({
     query: GetPostsDocument,
     variables,
   });
-  console.timeEnd("ssr");
 
   return addApolloState(apolloClient, {
     props: {},
