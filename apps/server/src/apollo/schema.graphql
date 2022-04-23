@@ -1,5 +1,9 @@
 type Query {
-  posts: [Post!]!
+  posts(options: PostOptions): [Post!]!
+}
+
+input PostOptions {
+  availableBeds: Int!
 }
 
 type Post {
@@ -28,7 +32,7 @@ enum PostType {
 }
 
 enum GenderRestriction {
-  cooed
+  coed
   male
   female
 }

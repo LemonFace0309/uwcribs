@@ -1,5 +1,5 @@
-query GetPosts($options: PostOptions) {
-  posts(options: $options) {
+query GetPosts {
+  posts {
     id
     type
     title
@@ -12,5 +12,10 @@ query GetPosts($options: PostOptions) {
     ppp
     fbLink
     genderRestriction
+    flagged
+    confirmed
+    author
+    text
+    groupId
   }
 }
