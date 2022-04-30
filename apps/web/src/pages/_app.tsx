@@ -3,7 +3,6 @@ import type { AppProps } from "next/app";
 import { ApolloProvider } from "@apollo/client";
 import { SessionProvider } from "next-auth/react";
 
-import { Layout } from "@src/components/layout";
 import { useApollo } from "@src/lib/apollo-client";
 
 import "@root/ui/styles/variables.scss";
@@ -16,9 +15,7 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
   return (
     <ApolloProvider client={apolloClient}>
       <SessionProvider session={pageProps.session}>
-        <Layout>
-          <Component {...pageProps} />
-        </Layout>
+        <Component {...pageProps} />
       </SessionProvider>
     </ApolloProvider>
   );
