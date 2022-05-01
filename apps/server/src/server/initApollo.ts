@@ -10,7 +10,7 @@ export const initApollo = (httpServer: http.Server): ApolloServer => {
     context: ({ req }) => {
       return req.ctx;
     },
-    plugins: [ApolloServerPluginDrainHttpServer({ httpServer })],
+    plugins: [ApolloServerPluginDrainHttpServer({ httpServer })], // used to allow apollo server to shutdown gracefully with express
   });
   return server;
 };
