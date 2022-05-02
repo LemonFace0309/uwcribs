@@ -40,6 +40,10 @@ export const createFacebookGroupStoriesById = async (req, res) => {
   }
 };
 
+const generateFBPermalink = (post, group) => {
+  return `https://m.facebook.com/groups/${group.id}/permalink/${post.id}`;
+};
+
 export const createOrUpdateAllFacebookGroupStories = async (req, res) => {
   try {
     const result = [];
@@ -47,7 +51,11 @@ export const createOrUpdateAllFacebookGroupStories = async (req, res) => {
     const promises = groups.map((g) => async () => {
       const { stories, groupId } = await getAllPosts(driver, g.id);
       const upserted = await upsertPosts(
-        stories.map((s) => ({ ...s, groupId }))
+        stories.map((s) => ({
+          ...s,
+          groupId,
+          fbLink: generateFBPermalink(s, g),
+        }))
       );
       result.push(upserted);
       return upserted;
