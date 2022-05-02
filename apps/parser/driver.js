@@ -8,7 +8,7 @@ export const driver = buildChromeDriver();
 
 export const logIntoFacebook = async (driver) => {
   await driver.get("https://mobile.facebook.com/");
-  await driver.wait(until.titleIs("Facebook - Log In or Sign Up"), 1000);
+  await driver.wait(until.titleIs("Facebook - log in or sign up"), 1000);
   await driver
     .findElement(By.id("m_login_email"))
     .sendKeys(process.env.FB_EMAIL);
