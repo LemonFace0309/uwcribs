@@ -73,6 +73,16 @@ const getPostFieldValue = (mappedEntities, field) => {
   return undefined;
 };
 
+const sanitizePPP = (ppp, beds) => {
+  if (!ppp || ppp < 100 || ppp > 8000) {
+    return 0;
+  }
+  if (beds > 1 && ppp > 1600 + 100 * (2 - beds)) {
+    return ppp / (beds || 1);
+  }
+  return ppp;
+};
+
 const shouldBeFlagged = (mappedEntities) => {
   return (
     mappedEntities.bedrooms.length !== 1 ||
@@ -129,7 +139,7 @@ export const logEntities = async () => {
             flagged = shouldBeFlagged(mappedEntities);
             bedrooms = getPostFieldValue(mappedEntities, "bedrooms");
             bathrooms = getPostFieldValue(mappedEntities, "bathrooms");
-            ppp = getPostFieldValue(mappedEntities, "ppp");
+            ppp = sanitizePPP(getPostFieldValue(mappedEntities, "ppp"));
             genderRestriction = getPostFieldValue(
               mappedEntities,
               "genderRestriction"
