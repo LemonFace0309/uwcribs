@@ -1,5 +1,5 @@
 import Head from "next/head";
-import { VFC } from "react";
+import { FC } from "react";
 
 type Props = {
   title: string;
@@ -8,7 +8,7 @@ type Props = {
   image: string;
 };
 
-export const Meta: VFC<Props> = ({ title, keywords, description, image }) => {
+export const Meta: FC<Props> = ({ title, keywords, description, image }) => {
   return (
     <Head>
       <meta name="viewport" content="width=device-width, initial-scale=1" />

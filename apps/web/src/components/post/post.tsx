@@ -1,5 +1,5 @@
 /* eslint-disable @next/next/no-img-element */
-import { VFC } from "react";
+import { FC } from "react";
 
 import cx from "classnames";
 import startCase from "lodash/startCase";
@@ -14,7 +14,7 @@ import { Ribbon } from "./ribbon";
 
 type Props = Unwrap<GetPostsQuery["posts"]>;
 
-export const Post: VFC<Props> = ({
+export const Post: FC<Props> = ({
   type,
   title,
   description,

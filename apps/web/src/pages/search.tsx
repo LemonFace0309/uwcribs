@@ -1,7 +1,7 @@
 import React from "react";
 
 import type { GetServerSideProps, NextPage } from "next";
-import { TabPanel, Tabs } from "react-tabs";
+import { Tab, TabList, TabPanel, Tabs } from "react-tabs";
 
 import {
   GetPostsDocument,
@@ -20,6 +20,13 @@ const Search: NextPage = () => {
     <Layout>
       <Tabs>
         <NavTabList />
+        {/* <div className="pt-20 bg-sea-300">
+          <div className="px-4 m-auto max-w-7xl">
+            <TabList>
+              <Tab>All</Tab>
+            </TabList>
+          </div>
+        </div> */}
         <TabPanel>
           <div className={styles.container}>
             <div className={styles.postsContainer}>

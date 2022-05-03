@@ -1,8 +1,9 @@
-import { FC, ReactElement } from "react";
+import { FC, ReactElement, ReactNode } from "react";
 
 import { Nav } from "./nav";
 
 type Props = {
+  children?: ReactNode;
   tabs?: ReactElement[];
 };
 

@@ -1,8 +1,9 @@
-import { FC } from "react";
+import { FC, ReactNode } from "react";
 
 import cx from "classnames";
 
 type Props = {
+  children?: ReactNode;
   className?: string;
 };
 

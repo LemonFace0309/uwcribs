@@ -1,11 +1,11 @@
 import Link from "next/link";
-import { VFC } from "react";
+import { FC } from "react";
 
 import { Logo } from "@root/ui/components";
 
 import { AuthButton } from "./auth-button";
 
-export const Nav: VFC = () => {
+export const Nav: FC = () => {
   return (
     <nav className="flex justify-between p-4 ">
       <Link href="/">
