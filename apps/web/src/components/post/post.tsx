@@ -28,7 +28,7 @@ export const Post: VFC<Props> = ({
   genderRestriction,
 }) => {
   return (
-    <Card className="flex flex-col items-center max-w-3xl md:flex-row space-y-4 md:space-y-0 md:space-x-4">
+    <Card className="flex flex-col items-center max-w-4xl md:flex-row space-y-4 md:space-y-0 md:space-x-4">
       <div className="relative w-full overflow-hidden rounded-xl shrink-0 md:w-[300px] h-[216px]">
         <Ribbon>{genderRestriction}</Ribbon>
         <img

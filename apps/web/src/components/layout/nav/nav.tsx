@@ -7,7 +7,7 @@ import { AuthButton } from "./auth-button";
 
 export const Nav: VFC = () => {
   return (
-    <nav className="flex justify-between p-4">
+    <nav className="flex justify-between p-4 ">
       <Link href="/">
         <a>
           <Logo className="cursor-pointer transition hover:-rotate-3 hover:scale-105" />

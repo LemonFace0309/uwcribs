@@ -1,6 +1,7 @@
 import React from "react";
 
 import type { GetServerSideProps, NextPage } from "next";
+import { TabPanel, Tabs } from "react-tabs";
 
 import {
   GetPostsDocument,
@@ -10,18 +11,25 @@ import {
 import { Layout } from "@src/components/layout";
 import { Posts } from "@src/components/posts";
 import { Filter } from "@src/components/search/filter";
+import { NavTabList } from "@src/components/search/nav-tab-list";
 import { addApolloState, initializeApollo } from "@src/lib/apollo-client";
 import styles from "@src/styles/pages/search.module.scss";
 
 const Search: NextPage = () => {
   return (
     <Layout>
-      <div className={styles.root}>
-        <Filter />
-        <div className={styles.postsContainer}>
-          <Posts />
-        </div>
-      </div>
+      <Tabs>
+        <NavTabList />
+        <TabPanel>
+          <div className={styles.container}>
+            <div className={styles.postsContainer}>
+              <Posts />
+            </div>
+            {/* <Filter /> */}
+            Test
+          </div>
+        </TabPanel>
+      </Tabs>
     </Layout>
   );
 };
