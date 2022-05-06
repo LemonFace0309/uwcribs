@@ -97,15 +97,26 @@ const defineCategories = () => {
     ["en"],
     ["Wi-Fi included", "wifi included", "internet included"]
   );
+
+  manager.addNamedEntityText("amenities", "gym", ["en"], ["Gym", "gymnasium"]);
+
+  manager.addNamedEntityText(
+    "amenities",
+    "utilities",
+    ["en"],
+    ["utilities included", "hydro included"]
+  );
 };
 
-const getPostFieldValue = (mappedEntities, field) => {
+const getPostFieldValue = (mappedEntities, field, isMultiple) => {
   if (mappedEntities[field].length) {
-    return getValueFromEntity(
-      mappedEntities[field].sort((a, b) => b.accuracy - a.accuracy)[0],
+    const values = getValueFromEntity(
+      mappedEntities[field].sort((a, b) => b.accuracy - a.accuracy),
       field
     );
+    return values ? (isMultiple ? values : values[0]) : undefined;
   }
+
   return undefined;
 };
 
@@ -159,6 +170,7 @@ export const logEntities = async () => {
             if (post._doc.confirmed) {
               return post._doc;
             }
+
             let flagged = false;
             let bathrooms;
             let bedrooms;
@@ -166,12 +178,14 @@ export const logEntities = async () => {
             let genderRestriction;
             let building;
 
+            let amenities;
             const mappedEntities = {
               bathrooms: filterEntities(p, "bathrooms", 0.9),
               bedrooms: filterEntities(p, "bedrooms", 0.9),
               ppp: filterEntities(p, "currency", 0.9),
               genderRestriction: filterEntities(p, "genderRestriction", 0.9),
               building: filterEntities(p, "building", 0.9),
+              amenities: filterEntities(p, "amenities", 0.8),
             };
 
             flagged = shouldBeFlagged(mappedEntities);
@@ -183,6 +197,8 @@ export const logEntities = async () => {
               "genderRestriction"
             );
             building = getPostFieldValue(mappedEntities, "building");
+            amenities = getPostFieldValue(mappedEntities, "amenities", true);
+
             return {
               ...post._doc,
               availableBeds: bedrooms,
@@ -192,6 +208,9 @@ export const logEntities = async () => {
               genderRestriction: genderRestriction || "coed",
               building: building || "other",
               flagged,
+              amenities: (amenities || []).filter(
+                (value, index, self) => self.indexOf(value) === index
+              ),
             };
           });
       })
