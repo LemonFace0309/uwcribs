@@ -80,3 +80,31 @@ export const getAllPosts = async (driver, id) => {
 export const fetchAllPosts = async () => {
   return await Post.find({});
 };
+
+export const checkIfPostStillExists = async (driver, post) => {
+  if (!post.fbLink) {
+    return false;
+  }
+  try {
+    await driver.get(post.fbLink);
+    await driver.wait(
+      until.elementLocated(By.css(`.story_body_container`)),
+      1000
+    );
+    const author = await extractAuthor(driver);
+    if (!author) return false;
+    return { ...post, author };
+  } catch (e) {
+    return false;
+  }
+};
+
+export const extractAuthor = async (driver) => {
+  return await driver
+    .findElement(By.css("header strong > a"))
+    .then(async (element) => {
+      return await element.getText().then((text) => {
+        return text;
+      });
+    });
+};

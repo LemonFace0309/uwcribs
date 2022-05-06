@@ -1,4 +1,5 @@
 import {
+  checkIfPostStillExists,
   clickAllElementsBySelector,
   fetchAllPosts,
   generateStoryArray,
@@ -72,4 +73,24 @@ export const createOrUpdateAllFacebookGroupStories = async (req, res) => {
 
 export const returnAllPosts = async (req, res) => {
   res.status(200).json(await fetchAllPosts());
+};
+
+export const updateAllPosts = async (req, res) => {
+  const posts = (await fetchAllPosts()).chunk(20);
+  let updatedPosts = [];
+  const results = [];
+  let post;
+  for (let i = 0; i < posts.length; i++) {
+    for (let j = 0; j < posts[i].length; j++) {
+      post = await checkIfPostStillExists(driver, posts[i][j]._doc);
+      if (!post.isAvailable) continue;
+      if (!post) {
+        updatedPosts.push({ ...posts[i][j]._doc, isAvailable: false });
+      } else {
+        updatedPosts.push(post);
+      }
+    }
+    results.push(await upsertPosts(updatedPosts));
+  }
+  res.status(200).json(results);
 };

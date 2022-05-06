@@ -4,6 +4,7 @@ import {
   createFacebookGroupStoriesById,
   createOrUpdateAllFacebookGroupStories,
   returnAllPosts,
+  updateAllPosts,
   writeFacebookGroupPageSourceById,
 } from "../controllers";
 
@@ -13,6 +14,7 @@ app.use("/group/:groupId/extract", writeFacebookGroupPageSourceById);
 app.use("/group/:groupId/update", createFacebookGroupStoriesById);
 app.use("/groups/update", createOrUpdateAllFacebookGroupStories);
 
+app.use("/posts/update", updateAllPosts);
 app.use("/posts/all", returnAllPosts);
 
 app.use("/hello", (req, res) => {
