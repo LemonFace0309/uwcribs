@@ -25,6 +25,11 @@ const PostSchema = new mongoose.Schema(
     },
     type: { type: String, enum: ["entireRentalUnit", "sharedRentalUnit"] },
     isAvailable: { type: Boolean, default: true },
+    building: {
+      type: String,
+      default: "other",
+      enum: ["other", "icon", "rezOne"],
+    },
   },
   { collection: "Post" }
 );

@@ -31,6 +31,7 @@ model Post {
   flagged           Boolean
   isAvailable       Boolean
   images            String[]
+  building          BuildingEnum
 }
 
 enum PostType {
@@ -42,4 +43,10 @@ enum GenderRestriction {
   coed
   male
   female
+}
+
+enum BuildingEnum {
+  icon
+  rezOne
+  other
 }
