@@ -83,6 +83,20 @@ const defineCategories = () => {
       "Blair House",
     ]
   );
+
+  manager.addNamedEntityText(
+    "building",
+    "icon",
+    ["en"],
+    ["ICON", "330 Phillip"]
+  );
+
+  manager.addNamedEntityText(
+    "amenities",
+    "wifi",
+    ["en"],
+    ["Wi-Fi included", "wifi included", "internet included"]
+  );
 };
 
 const getPostFieldValue = (mappedEntities, field) => {
