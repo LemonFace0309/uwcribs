@@ -12,6 +12,17 @@ const app = express();
 
 const PORT = process.env.PORT || 9999;
 
+Array.range = function (n) {
+  return Array.apply(null, Array(n)).map((x, i) => i);
+};
+Object.defineProperty(Array.prototype, "chunk", {
+  value: function (n) {
+    return Array.range(Math.ceil(this.length / n)).map((x, i) =>
+      this.slice(i * n, i * n + n)
+    );
+  },
+});
+
 startup();
 logEntities();
 

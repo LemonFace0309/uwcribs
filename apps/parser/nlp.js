@@ -2,17 +2,6 @@ import { NlpManager } from "node-nlp";
 
 import { fetchAllPosts, upsertPosts } from "./controllers/helpers";
 
-Array.range = function (n) {
-  return Array.apply(null, Array(n)).map((x, i) => i);
-};
-Object.defineProperty(Array.prototype, "chunk", {
-  value: function (n) {
-    return Array.range(Math.ceil(this.length / n)).map((x, i) =>
-      this.slice(i * n, i * n + n)
-    );
-  },
-});
-
 const manager = new NlpManager({ threshold: 0.6 });
 
 const defineCategories = () => {
