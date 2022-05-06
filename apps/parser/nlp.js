@@ -41,14 +41,47 @@ const defineCategories = () => {
     "genderRestriction",
     "male",
     ["en"],
-    [" male only", " men only", " male unit", "all male"]
+    [" male only", " men only", " male unit", "all male", "only men"]
   );
 
   manager.addNamedEntityText(
     "genderRestriction",
     "female",
     ["en"],
-    [" female only", " girls only", " female unit", "girls unit", "all female"]
+    [
+      " female only",
+      " girls only",
+      " female unit",
+      "girls unit",
+      "all female",
+      "only girls",
+    ]
+  );
+
+  manager.addNamedEntityText(
+    "building",
+    "icon",
+    ["en"],
+    ["ICON", "330 Phillip"]
+  );
+
+  manager.addNamedEntityText(
+    "building",
+    "rezOne",
+    ["en"],
+    [
+      "RezOne",
+      "Rez-One",
+      "Rez One",
+      "252 Phillip",
+      "250 Phillip",
+      "254 Phillip",
+      "256 Phillip",
+      "Elora House",
+      "Hespeler House",
+      "Fergus House",
+      "Blair House",
+    ]
   );
 };
 
@@ -117,12 +150,14 @@ export const logEntities = async () => {
             let bedrooms;
             let ppp;
             let genderRestriction;
+            let building;
 
             const mappedEntities = {
               bathrooms: filterEntities(p, "bathrooms", 0.9),
               bedrooms: filterEntities(p, "bedrooms", 0.9),
               ppp: filterEntities(p, "currency", 0.9),
               genderRestriction: filterEntities(p, "genderRestriction", 0.9),
+              building: filterEntities(p, "building", 0.9),
             };
 
             flagged = shouldBeFlagged(mappedEntities);
@@ -133,7 +168,7 @@ export const logEntities = async () => {
               mappedEntities,
               "genderRestriction"
             );
-
+            building = getPostFieldValue(mappedEntities, "building");
             return {
               ...post._doc,
               availableBeds: bedrooms,
@@ -141,6 +176,7 @@ export const logEntities = async () => {
               baths: bathrooms,
               ppp,
               genderRestriction: genderRestriction || "coed",
+              building: building || "other",
               flagged,
             };
           });
