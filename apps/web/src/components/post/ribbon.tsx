@@ -1,7 +1,11 @@
-import { FC } from "react";
+import { FC, ReactNode } from "react";
 
 import styles from "./post.module.scss";
 
-export const Ribbon: FC = ({ children }) => {
+type Props = {
+  children?: ReactNode;
+};
+
+export const Ribbon: FC<Props> = ({ children }) => {
   return <div className={styles.ribbon}>{children}</div>;
 };

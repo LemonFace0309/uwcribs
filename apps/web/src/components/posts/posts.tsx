@@ -1,6 +1,6 @@
 /* eslint-disable @next/next/no-img-element */
 import { useRouter } from "next/router";
-import { VFC } from "react";
+import { FC } from "react";
 
 import {
   GetPostsQueryVariables,
@@ -8,7 +8,7 @@ import {
 } from "@src/__generated__/graphql";
 import { Post } from "@src/components/post";
 
-export const Posts: VFC = () => {
+export const Posts: FC = () => {
   const router = useRouter();
   const { beds } = router.query;
 

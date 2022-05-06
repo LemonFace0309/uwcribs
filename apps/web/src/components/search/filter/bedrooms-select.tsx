@@ -1,5 +1,5 @@
 import { useRouter } from "next/router";
-import { Fragment, useEffect, useState, VFC } from "react";
+import { FC, Fragment, useEffect, useState } from "react";
 
 import { Listbox, Transition } from "@headlessui/react";
 import { HiCheck, HiSelector } from "react-icons/hi";
@@ -9,7 +9,7 @@ import {
   getQueryBedsIndex,
 } from "@src/components/search/filter/utils";
 
-export const BedroomsSelect: VFC = () => {
+export const BedroomsSelect: FC = () => {
   const router = useRouter();
   const [selected, setSelected] = useState(options[getQueryBedsIndex(router)]);
 

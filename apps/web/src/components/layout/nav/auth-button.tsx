@@ -1,10 +1,10 @@
-import { VFC } from "react";
+import { FC } from "react";
 
 import { signIn, signOut, useSession } from "next-auth/react";
 
 import { Button } from "@root/ui/components";
 
-export const AuthButton: VFC = () => {
+export const AuthButton: FC = () => {
   const { data: session } = useSession();
 
   if (session)

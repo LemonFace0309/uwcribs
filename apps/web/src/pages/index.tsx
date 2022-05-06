@@ -12,7 +12,7 @@ const Home: NextPage = () => {
           <span>
             <span>
               <h1 className="text-6xl text-white">
-                Find Your Dream Dorm in Seconds
+                Find Your Perfect Dorm in Seconds
               </h1>
               <Button
                 className={styles.btn}
