@@ -32,6 +32,7 @@ model Post {
   isAvailable       Boolean
   images            String[]
   building          BuildingEnum
+  season            SeasonEnum
 }
 
 enum PostType {
@@ -49,4 +50,10 @@ enum BuildingEnum {
   icon
   rezOne
   other
+}
+
+enum SeasonEnum {
+  summer
+  fall
+  winter
 }

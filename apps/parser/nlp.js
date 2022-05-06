@@ -2,6 +2,76 @@ import { NlpManager } from "node-nlp";
 
 import { fetchAllPosts, upsertPosts } from "./controllers/helpers";
 
+export const logEntities = async () => {
+  defineCategories();
+
+  const chunkedPosts = (await fetchAllPosts()).chunk(20);
+  chunkedPosts.forEach(async (posts) => {
+    const postData = await Promise.all(
+      posts.map(async (post) => {
+        return manager
+          .extractEntities(
+            "en",
+            post.text.replace("\n", " ").toLocaleLowerCase()
+          )
+          .then((p) => {
+            if (post._doc.confirmed) {
+              return post._doc;
+            }
+
+            let flagged = false;
+            let bathrooms;
+            let bedrooms;
+            let ppp;
+            let genderRestriction;
+            let building;
+            let amenities;
+            let season;
+
+            const mappedEntities = {
+              bathrooms: filterEntities(p, "bathrooms", 0.9),
+              bedrooms: filterEntities(p, "bedrooms", 0.9),
+              ppp: filterEntities(p, "currency", 0.9),
+              genderRestriction: filterEntities(p, "genderRestriction", 0.9),
+              building: filterEntities(p, "building", 0.9),
+              amenities: filterEntities(p, "amenities", 0.8),
+              season: filterEntities(p, "season", 0.8),
+            };
+
+            // if (mappedEntities.amenities.length) console.log(mappedEntities);
+            flagged = shouldBeFlagged(mappedEntities);
+            bedrooms = getPostFieldValue(mappedEntities, "bedrooms");
+            bathrooms = getPostFieldValue(mappedEntities, "bathrooms");
+            ppp = sanitizePPP(getPostFieldValue(mappedEntities, "ppp"));
+            genderRestriction = getPostFieldValue(
+              mappedEntities,
+              "genderRestriction"
+            );
+            building = getPostFieldValue(mappedEntities, "building");
+            amenities = getPostFieldValue(mappedEntities, "amenities", true);
+            season = getPostFieldValue(mappedEntities, "season");
+
+            return {
+              ...post._doc,
+              availableBeds: bedrooms,
+              totalBeds: bedrooms,
+              baths: bathrooms,
+              ppp,
+              genderRestriction: genderRestriction || "coed",
+              building: building || "other",
+              flagged,
+              amenities: (amenities || []).filter(
+                (value, index, self) => self.indexOf(value) === index
+              ),
+              season,
+            };
+          });
+      })
+    );
+    await upsertPosts(postData);
+  });
+};
+
 const manager = new NlpManager({ threshold: 0.6 });
 
 const defineCategories = () => {
@@ -106,17 +176,71 @@ const defineCategories = () => {
     ["en"],
     ["utilities included", "hydro included"]
   );
+
+  manager.addNamedEntityText(
+    "season",
+    "summer",
+    ["en"],
+    [
+      "summer",
+      "spring",
+      "May",
+      "August",
+      "Aug",
+      "May to August",
+      "May - August",
+      "May - Aug",
+      "May to Aug",
+    ]
+  );
+
+  manager.addNamedEntityText(
+    "season",
+    "fall",
+    ["en"],
+    [
+      "fall",
+      "September",
+      "December",
+      "Sep",
+      "Sept",
+      "Dec",
+      "Sep - Dec",
+      "Sept - Dec",
+      "September to December",
+      "September - December",
+      "Sept to Dec",
+      "Sep to Dec",
+    ]
+  );
+
+  manager.addNamedEntityText(
+    "season",
+    "winter",
+    ["en"],
+    [
+      "winter",
+      "January",
+      "April",
+      "Jan",
+      "Apr",
+      "Jan - Apr",
+      "January to April",
+      "January - April",
+      "Jan to Apr",
+    ]
+  );
 };
 
 const getPostFieldValue = (mappedEntities, field, isMultiple) => {
   if (mappedEntities[field].length) {
     const values = getValueFromEntity(
       mappedEntities[field].sort((a, b) => b.accuracy - a.accuracy),
-      field
+      field,
+      isMultiple
     );
-    return values ? (isMultiple ? values : values[0]) : undefined;
+    return values;
   }
-
   return undefined;
 };
 
@@ -135,7 +259,9 @@ const shouldBeFlagged = (mappedEntities) => {
     mappedEntities.bedrooms.length !== 1 ||
     mappedEntities.bathrooms.length !== 1 ||
     mappedEntities.ppp.length !== 1 ||
-    mappedEntities.genderRestriction.length !== 1
+    mappedEntities.genderRestriction.length !== 1 ||
+    mappedEntities.season.length !== 1 ||
+    mappedEntities.building.length !== 1
   );
 };
 
@@ -145,76 +271,11 @@ const filterEntities = (post, entityType, minAccuracy) => {
   );
 };
 
-const getValueFromEntity = (entity, type) => {
+const getValueFromEntity = (entity, type, isMultiple) => {
   switch (type) {
     case "ppp":
-      return entity.resolution.value;
+      return entity[0].resolution.value;
     default:
-      return entity.option;
+      return isMultiple ? entity.map(({ option }) => option) : entity[0].option;
   }
-};
-
-export const logEntities = async () => {
-  defineCategories();
-
-  const chunkedPosts = (await fetchAllPosts()).chunk(20);
-  chunkedPosts.forEach(async (posts) => {
-    const postData = await Promise.all(
-      posts.map(async (post) => {
-        return manager
-          .extractEntities(
-            "en",
-            post.text.replace("\n", " ").toLocaleLowerCase()
-          )
-          .then((p) => {
-            if (post._doc.confirmed) {
-              return post._doc;
-            }
-
-            let flagged = false;
-            let bathrooms;
-            let bedrooms;
-            let ppp;
-            let genderRestriction;
-            let building;
-
-            let amenities;
-            const mappedEntities = {
-              bathrooms: filterEntities(p, "bathrooms", 0.9),
-              bedrooms: filterEntities(p, "bedrooms", 0.9),
-              ppp: filterEntities(p, "currency", 0.9),
-              genderRestriction: filterEntities(p, "genderRestriction", 0.9),
-              building: filterEntities(p, "building", 0.9),
-              amenities: filterEntities(p, "amenities", 0.8),
-            };
-
-            flagged = shouldBeFlagged(mappedEntities);
-            bedrooms = getPostFieldValue(mappedEntities, "bedrooms");
-            bathrooms = getPostFieldValue(mappedEntities, "bathrooms");
-            ppp = sanitizePPP(getPostFieldValue(mappedEntities, "ppp"));
-            genderRestriction = getPostFieldValue(
-              mappedEntities,
-              "genderRestriction"
-            );
-            building = getPostFieldValue(mappedEntities, "building");
-            amenities = getPostFieldValue(mappedEntities, "amenities", true);
-
-            return {
-              ...post._doc,
-              availableBeds: bedrooms,
-              totalBeds: bedrooms,
-              baths: bathrooms,
-              ppp,
-              genderRestriction: genderRestriction || "coed",
-              building: building || "other",
-              flagged,
-              amenities: (amenities || []).filter(
-                (value, index, self) => self.indexOf(value) === index
-              ),
-            };
-          });
-      })
-    );
-    await upsertPosts(postData);
-  });
 };
