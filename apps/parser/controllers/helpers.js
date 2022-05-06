@@ -86,14 +86,28 @@ export const checkIfPostStillExists = async (driver, post) => {
     return false;
   }
   try {
+    // await driver.get(post.fbLink.replace("m.facebook", "facebook"));
+    // await driver.wait(until.elementLocated(By.css(`circle`)), 10000);
+    // // const author = await extractAuthor(driver);
+    // let images = (await extractImages(driver)).slice(1);
+    // if (!images) images = [];
+    // // if (!author) return false;
+    // // console.log({ ...post, author, imageUrl: images[0], images  });
+    // // return { ...post, author, imageUrl: images[0], images  };
+    // console.log({ ...post, imageUrl: images[0], images });
+    // return { ...post, imageUrl: images[0], images };
+
     await driver.get(post.fbLink);
     await driver.wait(
       until.elementLocated(By.css(`.story_body_container`)),
       1000
     );
-    const author = await extractAuthor(driver);
-    if (!author) return false;
-    return { ...post, author };
+    let author = await extractAuthor(driver);
+    let images = (await extractImages(driver)).slice(1);
+    if (!images || images.length > 30) images = [];
+    if (!author) author = post.author || "";
+    // console.log({ ...post, author, imageUrl: images[0], images  });
+    return { ...post, author, imageUrl: images[0], images };
   } catch (e) {
     return false;
   }
@@ -106,5 +120,19 @@ export const extractAuthor = async (driver) => {
       return await element.getText().then((text) => {
         return text;
       });
+    });
+};
+
+export const extractImages = async (driver) => {
+  return await driver
+    .findElements(By.css("div div a img"))
+    .then(async (elements) => {
+      return await Promise.all(
+        elements.map(async (element) => {
+          return await element.getAttribute("src").then((src) => {
+            return src;
+          });
+        })
+      );
     });
 };
