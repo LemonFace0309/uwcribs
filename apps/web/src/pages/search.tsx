@@ -1,7 +1,7 @@
 import React from "react";
 
 import type { GetServerSideProps, NextPage } from "next";
-import { Tab, TabList, TabPanel, Tabs } from "react-tabs";
+import { TabPanel, Tabs } from "react-tabs";
 
 import {
   GetPostsDocument,
@@ -19,14 +19,8 @@ const Search: NextPage = () => {
   return (
     <Layout>
       <Tabs>
-        <NavTabList />
-        {/* <div className="pt-20 bg-sea-300">
-          <div className="px-4 m-auto max-w-7xl">
-            <TabList>
-              <Tab>All</Tab>
-            </TabList>
-          </div>
-        </div> */}
+        {/* Avoids React Tabs from throwing an error with inequal number of Tab and TabPanel components */}
+        {NavTabList({})}
         <TabPanel>
           <div className={styles.container}>
             <div className={styles.postsContainer}>

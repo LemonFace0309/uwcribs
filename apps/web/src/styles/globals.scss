@@ -18,3 +18,40 @@ a {
 * {
   box-sizing: border-box;
 }
+
+/* react tabs */
+.react-tabs {
+  -webkit-tap-highlight-color: transparent;
+
+  &__tab {
+    display: inline-block;
+    list-style: none;
+    padding: 16px 48px;
+    color: #52525b;
+    cursor: pointer;
+
+    &--selected {
+      color: black;
+      border-bottom: 2px solid #8dc5ce;
+    }
+
+    &--disabled {
+      cursor: default;
+    }
+
+    &:hover {
+      &:not(.react-tabs__tab--selected) {
+        color: black;
+        border-bottom: 2px solid #d4d4d8;
+      }
+    }
+  }
+
+  &__tab-panel {
+    display: none;
+
+    &--selected {
+      display: block;
+    }
+  }
+}
