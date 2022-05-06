@@ -15,6 +15,7 @@ const PostSchema = new mongoose.Schema(
     description: { type: String, default: "" },
     title: { type: String, default: "" },
     imageUrl: { type: String, default: "" },
+    images: { type: [String], default: [] },
     ppp: { type: Number, default: null },
     fbLink: { type: String, default: "" },
     genderRestriction: {

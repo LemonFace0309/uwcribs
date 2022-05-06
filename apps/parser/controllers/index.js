@@ -89,6 +89,7 @@ export const updateAllPosts = async (req, res) => {
       } else {
         updatedPosts.push(post);
       }
+      driver.sleep(2000);
     }
     results.push(await upsertPosts(updatedPosts));
   }
