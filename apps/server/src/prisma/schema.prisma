@@ -29,6 +29,7 @@ model Post {
   text              String
   groupId           String            @db.ObjectId
   flagged           Boolean
+  isAvailable       Boolean
 }
 
 enum PostType {

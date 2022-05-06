@@ -23,6 +23,7 @@ const PostSchema = new mongoose.Schema(
       enum: ["coed", "male", "female"],
     },
     type: { type: String, enum: ["entireRentalUnit", "sharedRentalUnit"] },
+    isAvailable: { type: Boolean, default: true },
   },
   { collection: "Post" }
 );
