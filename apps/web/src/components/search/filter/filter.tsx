@@ -1,8 +1,11 @@
 import { FC } from "react";
 
 import { Button } from "@root/ui/components";
-import { BedroomsSelect } from "@src/components/search/filter/lib/bedrooms-select/bedrooms-select";
-import { SeasonRadio } from "@src/components/search/filter/lib/season-radio";
+import {
+  BathroomsSelect,
+  BedroomsSelect,
+  SeasonRadio,
+} from "@src/components/search/filter/lib";
 
 export const Filter: FC = () => {
   return (
@@ -17,7 +20,8 @@ export const Filter: FC = () => {
         </Button>
       </div>
       <SeasonRadio />
-      {/* <BedroomsSelect /> */}
+      <BedroomsSelect />
+      <BathroomsSelect />
     </div>
   );
 };
