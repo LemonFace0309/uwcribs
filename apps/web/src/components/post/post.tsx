@@ -6,7 +6,7 @@ import startCase from "lodash/startCase";
 import { FaBed } from "react-icons/fa";
 import { GrFacebook } from "react-icons/gr";
 
-import { Button, Card, Seperator } from "@root/ui/components";
+import { Button, Seperator } from "@root/ui/components";
 import { GetPostsQuery } from "@src/__generated__/graphql";
 import { Unwrap } from "@src/lib/types";
 
@@ -28,7 +28,7 @@ export const Post: FC<Props> = ({
   genderRestriction,
 }) => {
   return (
-    <Card className="flex flex-col items-center max-w-4xl md:flex-row space-y-4 md:space-y-0 md:space-x-4">
+    <div className="flex flex-col items-center max-w-4xl my-4 md:flex-row space-y-4 md:space-y-0 md:space-x-4">
       <div className="relative w-full overflow-hidden rounded-xl shrink-0 md:w-[300px] h-[216px]">
         <Ribbon>{genderRestriction}</Ribbon>
         <img
@@ -72,6 +72,6 @@ export const Post: FC<Props> = ({
           </Button>
         </div>
       </div>
-    </Card>
+    </div>
   );
 };
