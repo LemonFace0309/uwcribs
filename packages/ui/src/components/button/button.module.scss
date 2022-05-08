@@ -55,6 +55,23 @@
   }
 }
 
+.blue {
+  background-color: var(--color-blue-600);
+  color: var(--color-white);
+
+  &.active,
+  &:active {
+    background-color: var(--color-blue-700);
+  }
+
+  &:hover,
+  &.hover {
+    &:not(:active):not(.active) {
+      background-color: var(--color-blue-700);
+    }
+  }
+}
+
 /* Variants */
 
 .simple,
@@ -81,12 +98,27 @@
   &.navy {
     color: var(--color-navy-600);
   }
+  &.blue {
+    color: var(--color-blue-600);
+  }
+}
 
+.outline,
+.rounded-outline {
   &.active,
   &:active,
   &:hover,
   &.hover {
     color: white;
+  }
+}
+
+.text {
+  &.active,
+  &:active,
+  &:hover,
+  &.hover {
+    background-color: transparent !important;
   }
 }
 
@@ -100,6 +132,9 @@
   }
   &.navy {
     border: 1px solid var(--color-navy-600);
+  }
+  &.blue {
+    color: 1px solid var(--color-blue-600);
   }
 }
 

@@ -26,8 +26,7 @@ const Search: NextPage = () => {
             <div className={styles.postsContainer}>
               <Posts />
             </div>
-            {/* <Filter /> */}
-            Test
+            <Filter />
           </div>
         </TabPanel>
       </Tabs>
