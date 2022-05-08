@@ -6,7 +6,6 @@ export const bedOptions = [
   { label: "3️⃣", value: "3" },
   { label: "4️⃣", value: "4" },
   { label: "5️⃣", value: "5" },
-  { label: "ANY", value: null },
 ];
 
 export const getQueryBedsIndex = (router: NextRouter) => {

@@ -2,6 +2,7 @@
 import { useRouter } from "next/router";
 import { FC } from "react";
 
+import { Seperator } from "@root/ui/components";
 import {
   GetPostsQueryVariables,
   useGetPostsQuery,
@@ -30,7 +31,10 @@ export const Posts: FC = () => {
   return (
     <>
       {data.posts.map((post) => (
-        <Post key={post.id} {...post} />
+        <>
+          <Post key={post.id} {...post} />
+          <Seperator fullWidth />
+        </>
       ))}
     </>
   );

@@ -9,7 +9,7 @@ export type Props = {
   children: React.ReactNode;
   className?: string;
   variant?: "simple" | "rounded" | "outline" | "rounded-outline" | "text";
-  color?: "sea" | "salmon" | "navy";
+  color?: "sea" | "salmon" | "navy" | "blue";
   size?: "sm" | "md" | "lg";
   href?: string;
 } & React.ComponentPropsWithoutRef<"button">;

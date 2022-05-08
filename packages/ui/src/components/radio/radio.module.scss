@@ -1,0 +1,19 @@
+.group {
+  & > * + * {
+    margin-top: 16px;
+  }
+}
+
+.label {
+  display: block;
+  cursor: pointer;
+
+  & > span {
+    font-size: 0.875rem; /* 14px */
+    line-height: 1.25rem; /* 20px */
+  }
+}
+
+.input {
+  margin-right: 12px;
+}
