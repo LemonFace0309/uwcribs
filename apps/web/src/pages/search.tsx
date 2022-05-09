@@ -12,14 +12,11 @@ import { Layout } from "@src/components/layout";
 import { Posts } from "@src/components/posts";
 import { Filter } from "@src/components/search/filter";
 import { NavTabList } from "@src/components/search/nav-tab-list";
-import { ContextProps, SearchProvider } from "@src/context/search";
+import { SearchProps, SearchProvider } from "@src/context/search";
 import { addApolloState, initializeApollo } from "@src/lib/apollo-client";
 import styles from "@src/styles/pages/search.module.scss";
 
-const Search: NextPage<{ searchParams: ContextProps }> = ({ searchParams }) => {
-  console.log("hi");
-  console.log("test", { searchParams });
-
+const Search: NextPage<{ searchParams: SearchProps }> = ({ searchParams }) => {
   return (
     <Layout>
       <SearchProvider params={searchParams}>
@@ -43,18 +40,18 @@ const Search: NextPage<{ searchParams: ContextProps }> = ({ searchParams }) => {
 export const getServerSideProps: GetServerSideProps = async (ctx) => {
   const apolloClient = initializeApollo();
 
-  let variables: GetPostsQueryVariables = {};
-  if (ctx.query.beds && typeof ctx.query.beds === "string") {
-    variables = {
-      options: {
-        availableBeds: parseInt(ctx.query.beds),
-      },
-    };
-  }
-  await apolloClient.query<GetPostsQuery, GetPostsQueryVariables>({
-    query: GetPostsDocument,
-    variables,
-  });
+  // let variables: GetPostsQueryVariables = {};
+  // if (ctx.query.beds && typeof ctx.query.beds === "string") {
+  //   variables = {
+  //     options: {
+  //       availableBeds: parseInt(ctx.query.beds),
+  //     },
+  //   };
+  // }
+  // await apolloClient.query<GetPostsQuery, GetPostsQueryVariables>({
+  //   query: GetPostsDocument,
+  //   variables,
+  // });
 
   return addApolloState(apolloClient, {
     props: {

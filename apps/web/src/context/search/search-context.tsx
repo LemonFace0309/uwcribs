@@ -1,28 +1,40 @@
-import { createContext, FC, ReactNode, useContext } from "react";
+import {
+  createContext,
+  Dispatch,
+  FC,
+  ReactNode,
+  useContext,
+  useReducer,
+} from "react";
 
-import { SeasonEnum } from "@prisma/client";
-
-export type ContextProps = {
-  season: SeasonEnum | undefined;
-  availableBeds: number | undefined;
-  baths: number | undefined;
-};
+import { reducer } from "./reducer";
+import { ContextProps, SearchProps } from "./types";
 
 export const useSearchContext = () => {
   return useContext(SearchContext);
 };
 
 export const SearchContext = createContext<ContextProps>({
-  season: undefined,
-  availableBeds: undefined,
-  baths: undefined,
+  state: {
+    season: undefined,
+    availableBeds: undefined,
+    baths: undefined,
+  },
+  dispatch: () => null,
 });
 
 export const SearchProvider: FC<{
-  params: ContextProps;
+  params: SearchProps;
   children: ReactNode;
 }> = ({ params, children }) => {
+  const [state, dispatch] = useReducer(reducer, params);
+
+  const value = {
+    state,
+    dispatch,
+  };
+
   return (
-    <SearchContext.Provider value={params}>{children}</SearchContext.Provider>
+    <SearchContext.Provider value={value}>{children}</SearchContext.Provider>
   );
 };
