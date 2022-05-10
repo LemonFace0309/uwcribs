@@ -1,6 +1,7 @@
-import { FC } from "react";
+import { FC, useState } from "react";
 
 import { Select, Seperator } from "@root/ui/components";
+import { useSearchContext } from "@src/context/search";
 
 const options = [
   { label: "1️⃣ ➕", value: "1" },
@@ -11,10 +12,22 @@ const options = [
 ];
 
 export const BathroomsSelect: FC = () => {
+  const { dispatch } = useSearchContext();
+  const [option, setOption] = useState<string | undefined>();
+
+  const selectHandler = (value: string | undefined) => {
+    setOption(value);
+    if (!value) return;
+    dispatch({
+      type: "baths",
+      value,
+    });
+  };
+
   return (
     <>
       <p className="mt-10 mb-4 text-sm font-bold">Bathrooms</p>
-      <Select options={options} />
+      <Select options={options} value={option} onChange={selectHandler} />
       <Seperator fullWidth className="mt-10" />
     </>
   );

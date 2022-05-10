@@ -12,7 +12,11 @@ import { Layout } from "@src/components/layout";
 import { Posts } from "@src/components/posts";
 import { Filter } from "@src/components/search/filter";
 import { NavTabList } from "@src/components/search/nav-tab-list";
-import { SearchProps, SearchProvider } from "@src/context/search";
+import {
+  getSearchParams,
+  SearchProps,
+  SearchProvider,
+} from "@src/context/search";
 import { addApolloState, initializeApollo } from "@src/lib/apollo-client";
 import styles from "@src/styles/pages/search.module.scss";
 
@@ -55,7 +59,7 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
 
   return addApolloState(apolloClient, {
     props: {
-      searchParams: ctx.query,
+      searchParams: getSearchParams(ctx.query),
     },
   });
 };

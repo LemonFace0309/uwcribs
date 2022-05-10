@@ -1,6 +1,6 @@
 /* eslint-disable @next/next/no-img-element */
 import { useRouter } from "next/router";
-import { FC } from "react";
+import { FC, Fragment } from "react";
 
 import { Seperator } from "@root/ui/components";
 import {
@@ -9,7 +9,7 @@ import {
 } from "@src/__generated__/graphql";
 import { Post } from "@src/components/post";
 
-export const Posts: FC = () => {
+export const Posts = () => {
   const router = useRouter();
   const { beds } = router.query;
 
@@ -31,10 +31,10 @@ export const Posts: FC = () => {
   return (
     <>
       {data.posts.map((post) => (
-        <>
-          <Post key={post.id} {...post} />
+        <Fragment key={post.id}>
+          <Post {...post} />
           <Seperator fullWidth />
-        </>
+        </Fragment>
       ))}
     </>
   );

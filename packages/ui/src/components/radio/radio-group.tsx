@@ -17,7 +17,7 @@ export interface RadioGroupProps {
   /** An array of objects, each object is mapped onto a `Radio` element within the group. Name must be unique to the group. */
   options: OptionsPropType;
   /** Function that gets after each change event */
-  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  onChange?: (val: string) => void;
   /** Sets the `name` prop on each of the `Radio` elements in the group */
   name?: string;
 }
@@ -41,9 +41,10 @@ export const RadioGroup = (props: RadioGroupProps) => {
 
   const onRadioChange = useCallback(
     (e: ChangeEvent<HTMLInputElement>) => {
-      setSelectedValue(e.currentTarget.value);
       if (onChange) {
-        onChange(e);
+        onChange(e.currentTarget.value);
+      } else {
+        setSelectedValue(e.currentTarget.value);
       }
     },
     [onChange]

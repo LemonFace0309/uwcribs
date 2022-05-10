@@ -1,16 +1,11 @@
 import { SeasonEnum } from "@prisma/client";
 import cloneDeep from "lodash/cloneDeep";
 
-import { SearchProps } from "./types";
-
-type ActionType = {
-  type: keyof SearchProps;
-  value: string;
-};
+import { SearchActionType, SearchProps } from "./types";
 
 export const reducer = (
   state: SearchProps,
-  action: ActionType
+  action: SearchActionType
 ): SearchProps => {
   switch (action.type) {
     case "season":
