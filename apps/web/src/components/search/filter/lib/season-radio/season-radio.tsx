@@ -10,8 +10,10 @@ const options = [
 ];
 
 export const SeasonRadio: FC = () => {
-  const { dispatch } = useSearchContext();
-  const [option, setOption] = useState<string | undefined>();
+  const { state, dispatch } = useSearchContext();
+  const [option, setOption] = useState<string | undefined>(
+    state.season ? state.season.toString() : undefined
+  );
 
   const radioHandler = (value: string) => {
     setOption(value);

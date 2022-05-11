@@ -43,7 +43,7 @@ export const SearchProvider: FC<{
       { href: "/search", query },
       { scroll: false }
     );
-  }, [router, state]);
+  }, [state]);
 
   const value = {
     state,

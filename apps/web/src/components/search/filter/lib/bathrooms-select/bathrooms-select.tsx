@@ -12,8 +12,10 @@ const options = [
 ];
 
 export const BathroomsSelect: FC = () => {
-  const { dispatch } = useSearchContext();
-  const [option, setOption] = useState<string | undefined>();
+  const { state, dispatch } = useSearchContext();
+  const [option, setOption] = useState<string | undefined>(
+    state.baths ? state.baths.toString() : undefined
+  );
 
   const selectHandler = (value: string | undefined) => {
     setOption(value);

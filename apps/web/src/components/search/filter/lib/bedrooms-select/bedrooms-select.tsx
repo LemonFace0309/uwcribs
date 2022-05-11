@@ -1,7 +1,6 @@
 import { FC, useState } from "react";
 
 import { Select, Seperator } from "@root/ui/components";
-import { getQueryBedsIndex } from "@src/components/search/filter/utils";
 import { useSearchContext } from "@src/context/search";
 
 const options = [
@@ -13,8 +12,10 @@ const options = [
 ];
 
 export const BedroomsSelect: FC = () => {
-  const { dispatch } = useSearchContext();
-  const [option, setOption] = useState<string | undefined>();
+  const { state, dispatch } = useSearchContext();
+  const [option, setOption] = useState<string | undefined>(
+    state.availableBeds ? state.availableBeds.toString() : undefined
+  );
 
   const selectHandler = (value: string | undefined) => {
     setOption(value);
