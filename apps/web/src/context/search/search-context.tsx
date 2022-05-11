@@ -1,9 +1,10 @@
+import { useRouter } from "next/router";
 import {
   createContext,
-  Dispatch,
   FC,
   ReactNode,
   useContext,
+  useEffect,
   useReducer,
 } from "react";
 
@@ -27,7 +28,22 @@ export const SearchProvider: FC<{
   params: SearchProps;
   children: ReactNode;
 }> = ({ params, children }) => {
+  const router = useRouter();
   const [state, dispatch] = useReducer(reducer, params);
+
+  // update query string on state update
+  useEffect(() => {
+    const query: Record<string, string> = {};
+    for (const [key, value] of Object.entries(state)) {
+      if (!value) continue;
+      query[key] = value.toString();
+    }
+    router.push(
+      { href: "/search", query },
+      { href: "/search", query },
+      { scroll: false }
+    );
+  }, [state]);
 
   const value = {
     state,

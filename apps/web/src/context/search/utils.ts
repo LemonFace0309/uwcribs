@@ -6,13 +6,11 @@ import type { SearchProps } from "./types";
 export const getSearchParams = (query: ParsedUrlQuery): SearchProps => {
   return {
     season:
-      typeof query.season === "string"
-        ? (query.season as SeasonEnum)
-        : undefined,
+      typeof query.season === "string" ? (query.season as SeasonEnum) : null,
     availableBeds:
       typeof query.availableBeds === "string"
         ? parseInt(query.availableBeds)
-        : undefined,
-    baths: typeof query.baths === "string" ? parseInt(query.baths) : undefined,
+        : null,
+    baths: typeof query.baths === "string" ? parseInt(query.baths) : null,
   };
 };
