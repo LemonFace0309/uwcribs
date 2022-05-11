@@ -57,6 +57,8 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
   //   variables,
   // });
 
+  console.log("3", getSearchParams(ctx.query));
+
   return addApolloState(apolloClient, {
     props: {
       searchParams: getSearchParams(ctx.query),
