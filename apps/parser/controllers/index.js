@@ -126,7 +126,6 @@ export const selfHostAllImages = async (_req, res) => {
       )
         continue;
       for (let k = 0; k < posts[i][j]._doc.images.length; k++) {
-        console.log(posts[i][j]._doc);
         img = posts[i][j]._doc.images[k];
         if (!img.includes("scontent") || !img.includes("external")) continue;
 
@@ -135,7 +134,7 @@ export const selfHostAllImages = async (_req, res) => {
           getOriginalFileName(posts[i][j]._doc, img),
           "image/jpeg"
         );
-        updatedImages.push(await newUrl);
+        updatedImages.push(newUrl);
       }
       updatedPosts.push({ ...posts[i][j]._doc, images: updatedImages });
       updatedImages = [];
