@@ -5,6 +5,7 @@ import {
   generateStoryArray,
   getAllGroups,
   getAllPosts,
+  transferImageToS3AndReturnURL,
   upsertPosts,
   visitFacebookGroupById,
   writePageSourceToFile,
@@ -92,6 +93,55 @@ export const updateAllPosts = async (req, res) => {
       driver.sleep(2000);
     }
     results.push(await upsertPosts(updatedPosts));
+  }
+  res.status(200).json(results);
+};
+
+const getOriginalFileName = (post, url) => {
+  let str = "";
+  if (url.includes("scontent")) {
+    str = `${post.id}/images/${url.split("?")[0].split("/").pop()}`;
+  } else if (url.includes("external")) {
+    str = `${post.id}/images/${url
+      .split("&url=")[1]
+      .split("&cfs=")[0]
+      .replace("%3A", ":")
+      .replace("%2F", "/")}`;
+  }
+  return str;
+};
+
+export const selfHostAllImages = async (_req, res) => {
+  const posts = (await fetchAllPosts()).chunk(20);
+  let updatedPosts = [];
+  let updatedImages = [];
+  const results = [];
+  let newUrl;
+  let img;
+  for (let i = 0; i < posts.length; i++) {
+    for (let j = 0; j < posts[i].length; j++) {
+      if (
+        posts[i][j]._doc.images.length &&
+        posts[i][j]._doc.images[0].includes("uwcribs")
+      )
+        continue;
+      for (let k = 0; k < posts[i][j]._doc.images.length; k++) {
+        console.log(posts[i][j]._doc);
+        img = posts[i][j]._doc.images[k];
+        if (!img.includes("scontent") || !img.includes("external")) continue;
+
+        newUrl = await transferImageToS3AndReturnURL(
+          img,
+          getOriginalFileName(posts[i][j]._doc, img),
+          "image/jpeg"
+        );
+        updatedImages.push(await newUrl);
+      }
+      updatedPosts.push({ ...posts[i][j]._doc, images: updatedImages });
+      updatedImages = [];
+    }
+    results.push(await upsertPosts(updatedPosts));
+    updatedPosts = [];
   }
   res.status(200).json(results);
 };

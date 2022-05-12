@@ -4,6 +4,7 @@ import {
   createFacebookGroupStoriesById,
   createOrUpdateAllFacebookGroupStories,
   returnAllPosts,
+  selfHostAllImages,
   updateAllPosts,
   writeFacebookGroupPageSourceById,
 } from "../controllers";
@@ -16,6 +17,8 @@ app.use("/groups/update", createOrUpdateAllFacebookGroupStories);
 
 app.use("/posts/update", updateAllPosts);
 app.use("/posts/all", returnAllPosts);
+
+app.use("/images/update", selfHostAllImages);
 
 app.use("/hello", (req, res) => {
   res.send("Hello World!");
