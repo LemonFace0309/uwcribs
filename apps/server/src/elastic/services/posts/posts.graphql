@@ -17,5 +17,7 @@ query GetPosts {
     author
     text
     groupId
+    building
+    season
   }
 }

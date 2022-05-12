@@ -12,5 +12,7 @@ query GetPosts($options: PostOptions) {
     ppp
     fbLink
     genderRestriction
+    building
+    season
   }
 }

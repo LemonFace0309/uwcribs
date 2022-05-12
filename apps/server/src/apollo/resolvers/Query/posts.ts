@@ -6,12 +6,14 @@ export const posts = async (
   args: QueryPostsArgs,
   ctx: Context
 ) => {
-  if (args.options && args.options.availableBeds) {
+  if (args.options) {
     const res = await ctx.elastic.search({
       index: "posts_v1",
       query: {
         match: {
-          availableBeds: args.options.availableBeds,
+          season: args.options.season || undefined,
+          availableBeds: args.options.availableBeds || undefined,
+          baths: args.options.baths || undefined,
         },
       },
     });

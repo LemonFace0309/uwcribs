@@ -3,7 +3,9 @@ type Query {
 }
 
 input PostOptions {
-  availableBeds: Int!
+  season: SeasonEnum
+  availableBeds: Int
+  baths: Int
 }
 
 type Post {
@@ -24,6 +26,8 @@ type Post {
   author: String!
   text: String!
   groupId: ID!
+  building: BuildingEnum!
+  season: SeasonEnum!
 }
 
 enum PostType {
@@ -35,4 +39,16 @@ enum GenderRestriction {
   coed
   male
   female
+}
+
+enum BuildingEnum {
+  icon
+  rezOne
+  other
+}
+
+enum SeasonEnum {
+  summer
+  fall
+  winter
 }
