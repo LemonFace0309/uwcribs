@@ -179,7 +179,7 @@ const defineCategories = () => {
 
   manager.addNamedEntityText(
     "season",
-    "summer",
+    "spring",
     ["en"],
     [
       "summer",

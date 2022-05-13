@@ -45,11 +45,12 @@ const Search: NextPage<{ searchParams: SearchProps }> = ({ searchParams }) => {
 export const getServerSideProps: GetServerSideProps = async (ctx) => {
   const apolloClient = initializeApollo();
 
+  // Todo(Charles): refactor to make more scalable with incoming filters
   const variables: GetPostsQueryVariables = {
     options: {
       season:
-        typeof ctx.query.availableBeds === "string"
-          ? (ctx.query.availableBeds as SeasonEnum)
+        typeof ctx.query.season === "string"
+          ? (ctx.query.season as SeasonEnum)
           : undefined,
       availableBeds:
         typeof ctx.query.availableBeds === "string"
@@ -61,6 +62,7 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
           : undefined,
     },
   };
+  console.log(variables);
 
   await apolloClient.query<GetPostsQuery, GetPostsQueryVariables>({
     query: GetPostsDocument,

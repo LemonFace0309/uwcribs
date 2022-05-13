@@ -8,7 +8,7 @@ export const posts = async (
   args: QueryPostsArgs,
   ctx: Context
 ) => {
-  console.log("hehe");
+  console.log("test");
   if (args.options) {
     const res = await ctx.elastic.search({
       index: "posts_v1",

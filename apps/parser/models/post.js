@@ -32,8 +32,8 @@ const PostSchema = new mongoose.Schema(
     },
     season: {
       type: String,
-      default: "summer",
-      enum: ["summer", "fall", "winter"],
+      default: "spring",
+      enum: ["spring", "fall", "winter"],
     },
   },
   { collection: "Post" }

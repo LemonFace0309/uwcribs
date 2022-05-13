@@ -53,7 +53,7 @@ enum BuildingEnum {
 }
 
 enum SeasonEnum {
-  summer
+  spring
   fall
   winter
 }
