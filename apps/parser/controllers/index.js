@@ -98,17 +98,17 @@ export const updateAllPosts = async (req, res) => {
 };
 
 const getOriginalFileName = (post, url) => {
-  let str = "";
+  let fileName = "";
   if (url.includes("scontent")) {
-    str = `${post.id}/images/${url.split("?")[0].split("/").pop()}`;
+    fileName = `${post.id}/images/${url.split("?")[0].split("/").pop()}`;
   } else if (url.includes("external")) {
-    str = `${post.id}/images/${url
+    fileName = `${post.id}/images/${url
       .split("&url=")[1]
       .split("&cfs=")[0]
       .replace("%3A", ":")
       .replace("%2F", "/")}`;
   }
-  return str;
+  return fileName;
 };
 
 export const selfHostAllImages = async (_req, res) => {
