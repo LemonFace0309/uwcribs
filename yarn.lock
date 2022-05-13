@@ -634,10 +634,10 @@
   dependencies:
     "@cspotcode/source-map-consumer" "0.8.0"
 
-"@elastic/elasticsearch@^8.1.0":
-  version "8.2.0"
-  resolved "https://registry.yarnpkg.com/@elastic/elasticsearch/-/elasticsearch-8.2.0.tgz#af5e266d591e12ffb3266a249b642424cd5f6664"
-  integrity sha512-CQ1+g7SZut02pqhK0ZUq10Xm7mGns75PyvPgpxo+Awsn+bfry+YFJzdAYOttFZ/iBzCxeIwCvw6k8++gd6WPdw==
+"@elastic/elasticsearch@^8.2.0-patch.1":
+  version "8.2.0-patch.1"
+  resolved "https://registry.yarnpkg.com/@elastic/elasticsearch/-/elasticsearch-8.2.0-patch.1.tgz#494f3c20df796cd4877aa5bea87ed1bc6d06089a"
+  integrity sha512-ROx9WLPoRrJ/NvT3NEz/4ZhzvGRmB1dSvhkNyuQ+LoHSR2kh4CFqFmxoFtJmWN1uqbw8WvQ0AmMCyLbDI04IVA==
   dependencies:
     "@elastic/transport" "^8.2.0"
     tslib "^2.4.0"

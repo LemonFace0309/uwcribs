@@ -26,19 +26,6 @@ export const BedroomsSelect: FC = () => {
     });
   };
 
-  // const router = useRouter();
-  // const [selected, setSelected] = useState(options[getQueryBedsIndex(router)]);
-
-  // useEffect(() => {
-  //   if (!selected.value) {
-  //     router.push("/search");
-  //     return;
-  //   }
-
-  //   router.push(`/search?beds=${selected.value}`);
-  //   // eslint-disable-next-line react-hooks/exhaustive-deps
-  // }, [selected]);
-
   return (
     <>
       <p className="mt-10 mb-4 text-sm font-bold">Bedrooms</p>

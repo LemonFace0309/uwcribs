@@ -42,8 +42,12 @@ export class BaseIndexer<Doc extends { id: unknown }> {
    */
   async deleteIndex(): Promise<void> {
     const { index, elastic } = this;
-    await elastic.indices.delete({ index });
-    this.log(`Deleted existing index`);
+    try {
+      await elastic.indices.delete({ index });
+      this.log(`Deleted existing index`);
+    } catch (err) {
+      this.log(`Index does not exist yet`);
+    }
   }
 
   protected async bulk<O extends BulkOperation, D extends { id: unknown }>(
@@ -51,16 +55,16 @@ export class BaseIndexer<Doc extends { id: unknown }> {
     docs: D[]
   ): Promise<void> {
     const { index, elastic } = this;
-    const body = [];
+    const operations = [];
     for (const doc of docs) {
-      body.push({ [operation]: { _index: index, _id: doc.id } });
-      body.push({ ...doc });
+      operations.push({ [operation]: { _index: index, _id: doc.id } });
+      operations.push({ ...doc });
     }
 
     // wait_for is important, without it won't be able to delete old records.
     // See: https://www.elastic.co/guide/en/elasticsearch/reference/current/docs-delete-by-query.html#docs-delete-by-query-api-desc
     const res = await elastic.bulk({
-      body,
+      operations,
       refresh: "wait_for",
     });
 

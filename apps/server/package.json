@@ -17,7 +17,7 @@
   },
   "dependencies": {
     "@apollo/client": "^3.5.10",
-    "@elastic/elasticsearch": "^8.1.0",
+    "@elastic/elasticsearch": "^8.2.0-patch.1",
     "@prisma/client": "^3.11.1",
     "apollo-server": "^3.6.4",
     "apollo-server-core": "^3.6.4",

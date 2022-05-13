@@ -7,6 +7,7 @@ import {
   GetPostsDocument,
   GetPostsQuery,
   GetPostsQueryVariables,
+  SeasonEnum,
 } from "@src/__generated__/graphql";
 import { Layout } from "@src/components/layout";
 import { Posts } from "@src/components/posts";
@@ -44,18 +45,27 @@ const Search: NextPage<{ searchParams: SearchProps }> = ({ searchParams }) => {
 export const getServerSideProps: GetServerSideProps = async (ctx) => {
   const apolloClient = initializeApollo();
 
-  // let variables: GetPostsQueryVariables = {};
-  // if (ctx.query.beds && typeof ctx.query.beds === "string") {
-  //   variables = {
-  //     options: {
-  //       availableBeds: parseInt(ctx.query.beds),
-  //     },
-  //   };
-  // }
-  // await apolloClient.query<GetPostsQuery, GetPostsQueryVariables>({
-  //   query: GetPostsDocument,
-  //   variables,
-  // });
+  const variables: GetPostsQueryVariables = {
+    options: {
+      season:
+        typeof ctx.query.availableBeds === "string"
+          ? (ctx.query.availableBeds as SeasonEnum)
+          : undefined,
+      availableBeds:
+        typeof ctx.query.availableBeds === "string"
+          ? parseInt(ctx.query.availableBeds)
+          : undefined,
+      baths:
+        typeof ctx.query.baths === "string"
+          ? parseInt(ctx.query.baths)
+          : undefined,
+    },
+  };
+
+  await apolloClient.query<GetPostsQuery, GetPostsQueryVariables>({
+    query: GetPostsDocument,
+    variables,
+  });
 
   return addApolloState(apolloClient, {
     props: {
