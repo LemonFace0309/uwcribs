@@ -1,7 +1,14 @@
+import AWS from "aws-sdk";
 import fs from "fs";
+import got from "got";
 import { By, until } from "selenium-webdriver";
 
 import { Group, Post } from "../models";
+
+const s3 = new AWS.S3({
+  accessKeyId: process.env.AWS_ACCESS_KEY_ID,
+  secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
+});
 
 export const visitFacebookGroupById = async (driver, groupId) => {
   await driver.get(`https://mobile.facebook.com/groups/${groupId}`);
@@ -135,4 +142,25 @@ export const extractImages = async (driver) => {
         })
       );
     });
+};
+
+export const transferImageToS3AndReturnURL = async (
+  imageUrl,
+  filePath,
+  fileType
+) => {
+  try {
+    const response = await got.stream(imageUrl);
+    const uploadedFile = await s3
+      .upload({
+        Bucket: "uwcribs",
+        Key: filePath,
+        Body: response,
+        ContentType: fileType,
+      })
+      .promise();
+    return uploadedFile.Location;
+  } catch (e) {
+    return "";
+  }
 };

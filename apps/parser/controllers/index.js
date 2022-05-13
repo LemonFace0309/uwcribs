@@ -5,6 +5,7 @@ import {
   generateStoryArray,
   getAllGroups,
   getAllPosts,
+  transferImageToS3AndReturnURL,
   upsertPosts,
   visitFacebookGroupById,
   writePageSourceToFile,
@@ -92,6 +93,59 @@ export const updateAllPosts = async (req, res) => {
       driver.sleep(2000);
     }
     results.push(await upsertPosts(updatedPosts));
+  }
+  res.status(200).json(results);
+};
+
+const getOriginalFileName = (post, url) => {
+  let fileName = "";
+  /*
+  e.g. https://scontent-yyz1-1.xx.fbcdn.net/v/t39.30808-6/277252417_689252599098852_122789695364670973_n.jpg?stp=dst-jpg_p960x960&_nc_cat=107&ccb=1-6&_nc_sid=5cd70e&_nc_ohc=P-mYImeH1LMAX9kvUq3&_nc_ht=scontent-yyz1-1.xx&oh=00_AT-YDXl31ccV52mt8eqAA588xiq2dHHqPp5hb37E5DL3ow&oe=627B0616
+  becomes
+  <POST ID>/images/277252417_689252599098852_122789695364670973_n.jpg
+  */
+  if (url.includes("scontent")) {
+    fileName = `${post.id}/images/${url.split("?")[0].split("/").pop()}`;
+  } else if (url.includes("external")) {
+    fileName = `${post.id}/images/${url
+      .split("&url=")[1]
+      .split("&cfs=")[0]
+      .replace("%3A", ":")
+      .replace("%2F", "/")}`;
+  }
+  return fileName;
+};
+
+export const selfHostAllImages = async (_req, res) => {
+  const posts = (await fetchAllPosts()).chunk(20);
+  let updatedPosts = [];
+  let updatedImages = [];
+  const results = [];
+  let newUrl;
+  let img;
+  for (let i = 0; i < posts.length; i++) {
+    for (let j = 0; j < posts[i].length; j++) {
+      if (
+        posts[i][j]._doc.images.length &&
+        posts[i][j]._doc.images[0].includes("uwcribs")
+      )
+        continue;
+      for (let k = 0; k < posts[i][j]._doc.images.length; k++) {
+        img = posts[i][j]._doc.images[k];
+        if (!img.includes("scontent") || !img.includes("external")) continue;
+
+        newUrl = await transferImageToS3AndReturnURL(
+          img,
+          getOriginalFileName(posts[i][j]._doc, img),
+          "image/jpeg"
+        );
+        updatedImages.push(newUrl);
+      }
+      updatedPosts.push({ ...posts[i][j]._doc, images: updatedImages });
+      updatedImages = [];
+    }
+    results.push(await upsertPosts(updatedPosts));
+    updatedPosts = [];
   }
   res.status(200).json(results);
 };
