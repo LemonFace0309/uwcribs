@@ -99,6 +99,11 @@ export const updateAllPosts = async (req, res) => {
 
 const getOriginalFileName = (post, url) => {
   let fileName = "";
+  /*
+  e.g. https://scontent-yyz1-1.xx.fbcdn.net/v/t39.30808-6/277252417_689252599098852_122789695364670973_n.jpg?stp=dst-jpg_p960x960&_nc_cat=107&ccb=1-6&_nc_sid=5cd70e&_nc_ohc=P-mYImeH1LMAX9kvUq3&_nc_ht=scontent-yyz1-1.xx&oh=00_AT-YDXl31ccV52mt8eqAA588xiq2dHHqPp5hb37E5DL3ow&oe=627B0616
+  becomes
+  <POST ID>/images/277252417_689252599098852_122789695364670973_n.jpg
+  */
   if (url.includes("scontent")) {
     fileName = `${post.id}/images/${url.split("?")[0].split("/").pop()}`;
   } else if (url.includes("external")) {
