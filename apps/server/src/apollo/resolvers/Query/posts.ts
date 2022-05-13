@@ -1,4 +1,7 @@
-import { QueryDslQueryContainer } from "@elastic/elasticsearch/lib/api/types";
+import {
+  QueryDslBoolQuery,
+  QueryDslQueryContainer,
+} from "@elastic/elasticsearch/lib/api/types";
 
 import type { PostOptions, QueryPostsArgs } from "@src/__generated__/graphql";
 import type { Context } from "@src/server/context";
@@ -8,7 +11,6 @@ export const posts = async (
   args: QueryPostsArgs,
   ctx: Context
 ) => {
-  console.log("test");
   if (args.options) {
     const res = await ctx.elastic.search({
       index: "posts_v1",
@@ -31,20 +33,35 @@ export const posts = async (
 // Todo(Charles): refactor to make more scalable with incoming filters
 const constructPostsQuery = (options: PostOptions): QueryDslQueryContainer => {
   const query: QueryDslQueryContainer = {};
-  const match: typeof query.match = {};
+  const must: QueryDslBoolQuery["must"] = [];
 
   if (options.season) {
-    match.season = options.season;
+    must.push({
+      match: {
+        season: options.season,
+      },
+    });
   }
   if (options.availableBeds) {
-    match.availableBeds = options.availableBeds;
+    must.push({
+      match: {
+        availableBeds: options.availableBeds,
+      },
+    });
   }
   if (options.baths) {
-    match.baths = options.baths;
+    must.push({
+      range: {
+        baths: {
+          gte: options.baths,
+        },
+      },
+    });
   }
 
-  if (Object.keys(match).length) {
-    query.match = match;
+  if (must.length) {
+    query.bool = {};
+    query.bool.must = must;
   } else {
     query.match_all = {};
   }

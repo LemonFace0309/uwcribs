@@ -7,18 +7,14 @@ import {
   GetPostsDocument,
   GetPostsQuery,
   GetPostsQueryVariables,
-  SeasonEnum,
 } from "@src/__generated__/graphql";
 import { Layout } from "@src/components/layout";
 import { Posts } from "@src/components/posts";
 import { Filter } from "@src/components/search/filter";
 import { NavTabList } from "@src/components/search/nav-tab-list";
-import {
-  getSearchParams,
-  SearchProps,
-  SearchProvider,
-} from "@src/context/search";
+import { SearchProps, SearchProvider } from "@src/context/search";
 import { addApolloState, initializeApollo } from "@src/lib/apollo-client";
+import { getPostsSearchParams } from "@src/lib/search";
 import styles from "@src/styles/pages/search.module.scss";
 
 const Search: NextPage<{ searchParams: SearchProps }> = ({ searchParams }) => {
@@ -45,33 +41,16 @@ const Search: NextPage<{ searchParams: SearchProps }> = ({ searchParams }) => {
 export const getServerSideProps: GetServerSideProps = async (ctx) => {
   const apolloClient = initializeApollo();
 
-  // Todo(Charles): refactor to make more scalable with incoming filters
-  const variables: GetPostsQueryVariables = {
-    options: {
-      season:
-        typeof ctx.query.season === "string"
-          ? (ctx.query.season as SeasonEnum)
-          : undefined,
-      availableBeds:
-        typeof ctx.query.availableBeds === "string"
-          ? parseInt(ctx.query.availableBeds)
-          : undefined,
-      baths:
-        typeof ctx.query.baths === "string"
-          ? parseInt(ctx.query.baths)
-          : undefined,
-    },
-  };
-  console.log(variables);
+  const searchParams = getPostsSearchParams(ctx.query);
 
   await apolloClient.query<GetPostsQuery, GetPostsQueryVariables>({
     query: GetPostsDocument,
-    variables,
+    variables: { options: searchParams },
   });
 
   return addApolloState(apolloClient, {
     props: {
-      searchParams: getSearchParams(ctx.query),
+      searchParams: searchParams,
     },
   });
 };

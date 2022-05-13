@@ -1,12 +1,8 @@
 import { Dispatch } from "react";
 
-import { SeasonEnum } from "@prisma/client";
+import { GetPostsQueryVariables } from "@src/__generated__/graphql";
 
-export type SearchProps = {
-  season?: SeasonEnum | null;
-  availableBeds?: number | null;
-  baths?: number | null;
-};
+export type SearchProps = NonNullable<GetPostsQueryVariables["options"]>;
 
 export type SearchActionType = {
   type: keyof SearchProps;

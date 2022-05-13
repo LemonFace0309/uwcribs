@@ -1,5 +1,6 @@
-import { SeasonEnum } from "@prisma/client";
 import cloneDeep from "lodash/cloneDeep";
+
+import { SeasonEnum } from "@src/__generated__/graphql";
 
 import { SearchActionType, SearchProps } from "./types";
 

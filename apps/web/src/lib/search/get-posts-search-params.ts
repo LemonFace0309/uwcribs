@@ -1,10 +1,9 @@
 import { ParsedUrlQuery } from "querystring"; // from node
 
 import { SeasonEnum } from "@src/__generated__/graphql";
+import type { SearchProps } from "@src/context/search/types";
 
-import type { SearchProps } from "./types";
-
-export const getSearchParams = (query: ParsedUrlQuery): SearchProps => {
+export const getPostsSearchParams = (query: ParsedUrlQuery): SearchProps => {
   return {
     season:
       typeof query.season === "string" ? (query.season as SeasonEnum) : null,

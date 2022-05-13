@@ -1,3 +1,4 @@
+import { useRouter } from "next/router";
 import { FC } from "react";
 
 import { Button } from "@root/ui/components";
@@ -8,6 +9,8 @@ import {
 } from "@src/components/search/filter/lib";
 
 export const Filter: FC = () => {
+  const router = useRouter();
+
   return (
     <div>
       <div className="flex items-center justify-between">
@@ -15,6 +18,7 @@ export const Filter: FC = () => {
         <Button
           variant="text"
           color="blue"
+          onClick={() => router.push("/search")}
           className="opacity-50 hover:opacity-100">
           Clear Filters
         </Button>
