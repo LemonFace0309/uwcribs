@@ -3,6 +3,7 @@ import React from "react";
 import type { GetServerSideProps, NextPage } from "next";
 import { TabPanel, Tabs } from "react-tabs";
 
+import { Button, Modal } from "@root/ui/components";
 import {
   GetPostsDocument,
   GetPostsQuery,
@@ -10,7 +11,7 @@ import {
 } from "@src/__generated__/graphql";
 import { Layout } from "@src/components/layout";
 import { Posts } from "@src/components/posts";
-import { Filter } from "@src/components/search/filter";
+import { Filter, FilterModal } from "@src/components/search/filter";
 import { NavTabList } from "@src/components/search/nav-tab-list";
 import { SearchProps, SearchProvider } from "@src/context/search";
 import { addApolloState, initializeApollo } from "@src/lib/apollo-client";
@@ -24,12 +25,16 @@ const Search: NextPage<{ searchParams: SearchProps }> = ({ searchParams }) => {
         <Tabs>
           {/* Avoids React Tabs from throwing an error with inequal number of Tab and TabPanel components */}
           {NavTabList({})}
+
           <TabPanel>
+            <FilterModal />
             <div className={styles.container}>
               <div className={styles.postsContainer}>
                 <Posts />
               </div>
-              <Filter />
+              <div className="hidden 2xl:block">
+                <Filter />
+              </div>
             </div>
           </TabPanel>
         </Tabs>
