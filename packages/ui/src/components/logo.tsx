@@ -21,10 +21,10 @@ export const Logo: FC<Props> = ({ className, onClick }) => (
     <defs>
       <linearGradient
         id="paint0_linear_7830_1559"
-        x1="16.6354"
-        y1="-0.500001"
-        x2="79.9321"
-        y2="17.5477"
+        x1="7"
+        y1="25"
+        x2="112.419"
+        y2="-5.41161"
         gradientUnits="userSpaceOnUse">
         <stop stopColor="#62AFBB" />
         <stop offset="1" stopColor="#FF7C6B" />
