@@ -15,7 +15,11 @@ export const FilterModal: FC = () => {
       {show && (
         <Modal>
           <Filter />
-          <Button onClick={() => setShow(false)} variant="rounded-outline">
+
+          <Button
+            onClick={() => setShow(false)}
+            variant="rounded-outline"
+            className="mt-8">
             Apply Filters
           </Button>
         </Modal>
