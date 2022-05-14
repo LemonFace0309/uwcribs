@@ -32,7 +32,7 @@ const Search: NextPage<{ searchParams: SearchProps }> = ({ searchParams }) => {
               <div className={styles.postsContainer}>
                 <Posts />
               </div>
-              <div className="hidden xl:block">
+              <div className="hidden 2xl:block">
                 <Filter />
               </div>
             </div>
