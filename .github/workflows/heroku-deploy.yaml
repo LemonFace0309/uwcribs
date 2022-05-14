@@ -4,6 +4,10 @@ on:
   push:
     branches:
       - main
+    paths:
+      - "apps/server/**"
+      - ".github/workflows/server.yaml"
+      - ".github/workflows/heroku-deploy.yaml"
 
 jobs:
   build:
