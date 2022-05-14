@@ -4,10 +4,12 @@ import { GetPostsQueryVariables } from "@src/__generated__/graphql";
 
 export type SearchProps = NonNullable<GetPostsQueryVariables["options"]>;
 
-export type SearchActionType = {
-  type: keyof SearchProps;
-  value: string;
-};
+export type SearchActionType =
+  | {
+      type: keyof SearchProps;
+      value: string;
+    }
+  | { type: "clear" };
 
 export type ContextProps = {
   state: SearchProps;

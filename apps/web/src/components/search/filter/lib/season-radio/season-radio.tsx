@@ -11,12 +11,8 @@ const options = [
 
 export const SeasonRadio: FC = () => {
   const { state, dispatch } = useSearchContext();
-  const [option, setOption] = useState<string | undefined>(
-    state.season ? state.season.toString() : undefined
-  );
 
   const radioHandler = (value: string) => {
-    setOption(value);
     if (!value) return;
     dispatch({
       type: "season",
@@ -27,7 +23,11 @@ export const SeasonRadio: FC = () => {
   return (
     <>
       <p className="mt-10 mb-4 text-sm font-bold">Season</p>
-      <RadioGroup options={options} value={option} onChange={radioHandler} />
+      <RadioGroup
+        options={options}
+        value={state.season ? state.season.toString() : undefined}
+        onChange={radioHandler}
+      />
       <Seperator fullWidth className="mt-10" />
     </>
   );

@@ -13,12 +13,8 @@ const options = [
 
 export const BathroomsSelect: FC = () => {
   const { state, dispatch } = useSearchContext();
-  const [option, setOption] = useState<string | undefined>(
-    state.baths ? state.baths.toString() : undefined
-  );
 
   const selectHandler = (value: string | undefined) => {
-    setOption(value);
     if (!value) return;
     dispatch({
       type: "baths",
@@ -29,7 +25,11 @@ export const BathroomsSelect: FC = () => {
   return (
     <>
       <p className="mt-10 mb-4 text-sm font-bold">Bathrooms</p>
-      <Select options={options} value={option} onChange={selectHandler} />
+      <Select
+        options={options}
+        value={state.baths ? state.baths.toString() : undefined}
+        onChange={selectHandler}
+      />
       <Seperator fullWidth className="mt-10" />
     </>
   );

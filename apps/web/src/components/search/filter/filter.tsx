@@ -1,4 +1,3 @@
-import { useRouter } from "next/router";
 import { FC } from "react";
 
 import { Button } from "@root/ui/components";
@@ -7,9 +6,10 @@ import {
   BedroomsSelect,
   SeasonRadio,
 } from "@src/components/search/filter/lib";
+import { useSearchContext } from "@src/context/search";
 
 export const Filter: FC = () => {
-  const router = useRouter();
+  const { dispatch } = useSearchContext();
 
   return (
     <div>
@@ -18,7 +18,11 @@ export const Filter: FC = () => {
         <Button
           variant="text"
           color="blue"
-          onClick={() => router.push("/search")}
+          onClick={() =>
+            dispatch({
+              type: "clear",
+            })
+          }
           className="opacity-50 hover:opacity-100">
           Clear Filters
         </Button>

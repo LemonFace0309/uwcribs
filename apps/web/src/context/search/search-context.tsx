@@ -10,17 +10,14 @@ import {
 
 import { reducer } from "./reducer";
 import { ContextProps, SearchProps } from "./types";
+import { defaultSearchParams } from "./utils";
 
 export const useSearchContext = () => {
   return useContext(SearchContext);
 };
 
 export const SearchContext = createContext<ContextProps>({
-  state: {
-    season: undefined,
-    availableBeds: undefined,
-    baths: undefined,
-  },
+  state: defaultSearchParams,
   dispatch: () => null,
 });
 
