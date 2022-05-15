@@ -1,16 +1,21 @@
 import { FC, ReactElement, ReactNode } from "react";
 
+import cx from "classnames";
+
 import { Nav } from "./nav";
+
+import styles from "./layout.module.scss";
 
 type Props = {
   children?: ReactNode;
   tabs?: ReactElement[];
+  withBackground?: boolean;
 };
 
 /**
  * Layout of the app
  */
-export const Layout: FC<Props> = ({ children }) => {
+export const Layout: FC<Props> = ({ children, withBackground }) => {
   return (
     <div className="flex flex-col min-h-screen">
       <div className="bg-sea-300">
@@ -18,8 +23,10 @@ export const Layout: FC<Props> = ({ children }) => {
           <Nav />
         </div>
       </div>
-      <main className="flex-grow">{children}</main>
-      <footer>Footer</footer>
+      <main className={cx("flex-grow", { [styles.bg]: withBackground })}>
+        {children}
+      </main>
+      <footer></footer>
     </div>
   );
 };

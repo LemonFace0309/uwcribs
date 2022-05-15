@@ -3,7 +3,6 @@ import React from "react";
 import type { GetServerSideProps, NextPage } from "next";
 import { TabPanel, Tabs } from "react-tabs";
 
-import { Button, Modal } from "@root/ui/components";
 import {
   GetPostsDocument,
   GetPostsQuery,
@@ -20,7 +19,7 @@ import styles from "@src/styles/pages/search.module.scss";
 
 const Search: NextPage<{ searchParams: SearchProps }> = ({ searchParams }) => {
   return (
-    <Layout>
+    <Layout withBackground>
       <SearchProvider params={searchParams}>
         <Tabs>
           {/* Avoids React Tabs from throwing an error with inequal number of Tab and TabPanel components */}
