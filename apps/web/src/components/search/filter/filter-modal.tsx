@@ -5,7 +5,7 @@ import { Button, Modal } from "@root/ui/components";
 import { Filter } from "./filter";
 
 export const FilterModal: FC = () => {
-  const [show, setShow] = useState(true);
+  const [show, setShow] = useState(false);
 
   return (
     <div className="flex justify-center w-full mt-4 -mb-8 2xl:hidden">
