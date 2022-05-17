@@ -1,4 +1,4 @@
-import { FC, useState } from "react";
+import { FC } from "react";
 
 import { Select, Seperator } from "@root/ui/components";
 import { useSearchContext } from "@src/context/search";

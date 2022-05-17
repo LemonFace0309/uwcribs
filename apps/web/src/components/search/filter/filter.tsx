@@ -4,6 +4,7 @@ import { Button } from "@root/ui/components";
 import {
   BathroomsSelect,
   BedroomsSelect,
+  PriceRangeInput,
   SeasonRadio,
 } from "@src/components/search/filter/lib";
 import { useSearchContext } from "@src/context/search";
@@ -30,6 +31,8 @@ export const Filter: FC = () => {
       <SeasonRadio />
       <BedroomsSelect />
       <BathroomsSelect />
+      {/* WIP(Charles) */}
+      <PriceRangeInput />
     </div>
   );
 };

@@ -24,7 +24,7 @@ export const Button = React.forwardRef<HTMLButtonElement, Props>(
       color = "sea",
       size = "md",
       href,
-      ...props
+      ...otherProps
     },
     ref
   ) {
@@ -50,7 +50,7 @@ export const Button = React.forwardRef<HTMLButtonElement, Props>(
           styles[color],
           styles[size]
         )}
-        {...props}>
+        {...otherProps}>
         {withChildren(children)}
       </button>
     );
