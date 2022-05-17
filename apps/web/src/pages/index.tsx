@@ -1,4 +1,6 @@
 import Image from "next/image";
+import { useRouter } from "next/router";
+import { useEffect } from "react";
 
 import type { NextPage } from "next";
 
@@ -6,6 +8,12 @@ import { Button } from "@root/ui/components";
 import styles from "@src/styles/pages/landing.module.scss";
 
 const Home: NextPage = () => {
+  const router = useRouter();
+
+  useEffect(() => {
+    router.prefetch("/search");
+  }, []);
+
   return (
     <>
       <Image

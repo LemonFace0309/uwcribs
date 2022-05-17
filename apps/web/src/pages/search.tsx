@@ -9,6 +9,7 @@ import {
   GetPostsQueryVariables,
 } from "@src/__generated__/graphql";
 import { Layout } from "@src/components/layout";
+import { Meta } from "@src/components/meta";
 import { Posts } from "@src/components/posts";
 import { Filter, FilterModal } from "@src/components/search/filter";
 import { NavTabList } from "@src/components/search/nav-tab-list";
@@ -19,26 +20,29 @@ import styles from "@src/styles/pages/search.module.scss";
 
 const Search: NextPage<{ searchParams: SearchProps }> = ({ searchParams }) => {
   return (
-    <Layout withBackground>
-      <SearchProvider params={searchParams}>
-        <Tabs>
-          {/* Avoids React Tabs from throwing an error with inequal number of Tab and TabPanel components */}
-          {NavTabList({})}
+    <>
+      <Meta title="UW Cribs" keywords={["search"]} />
+      <Layout withBackground>
+        <SearchProvider params={searchParams}>
+          <Tabs>
+            {/* Avoids React Tabs from throwing an error with inequal number of Tab and TabPanel components */}
+            {NavTabList({})}
 
-          <TabPanel>
-            <FilterModal />
-            <div className={styles.container}>
-              <div className={styles.postsContainer}>
-                <Posts />
+            <TabPanel>
+              <FilterModal />
+              <div className={styles.container}>
+                <div className={styles.postsContainer}>
+                  <Posts />
+                </div>
+                <div className="hidden 2xl:block">
+                  <Filter />
+                </div>
               </div>
-              <div className="hidden 2xl:block">
-                <Filter />
-              </div>
-            </div>
-          </TabPanel>
-        </Tabs>
-      </SearchProvider>
-    </Layout>
+            </TabPanel>
+          </Tabs>
+        </SearchProvider>
+      </Layout>
+    </>
   );
 };
 

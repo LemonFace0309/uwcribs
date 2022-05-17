@@ -3,7 +3,8 @@ import { Head, Html, Main, NextScript } from "next/document";
 const Document = () => {
   return (
     <Html>
-      <Head>
+      <Head lang="en">
+        {/* Google Fonts Imports */}
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" />
         <link
@@ -26,6 +27,24 @@ const Document = () => {
             });
           `,
           }}
+        />
+        {/* Default SEO */}
+        <meta
+          name="keywords"
+          content="Waterloo University of Waterloo Housing Sublet Lease"
+        />
+        <meta
+          name="description"
+          content="A unified digital aggregator for the underserved university housing market"
+        />
+        <meta name="og:title" content="UW Cribs" />
+        <meta
+          name="og:description"
+          content="A unified digital aggregator for the underserved university housing market"
+        />
+        <meta
+          name="og:image"
+          content="https://cdn.spongebobwiki.org/thumb/3/32/Squidward%27s_house_Scavenger_Pants.png/1200px-Squidward%27s_house_Scavenger_Pants.png"
         />
       </Head>
       <body>
