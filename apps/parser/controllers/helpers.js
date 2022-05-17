@@ -105,18 +105,36 @@ export const checkIfPostStillExists = async (driver, post) => {
     // return { ...post, imageUrl: images[0], images };
 
     await driver.get(post.fbLink);
-    await driver.wait(
-      until.elementLocated(By.css(`.story_body_container`)),
-      1000
-    );
+    const text = await driver
+      .wait(until.elementLocated(By.css(`.story_body_container`)), 1000)
+      .then(async (element) => {
+        const text = await element.getText().then((text) => {
+          return text;
+        });
+        return text;
+      });
+
+    const title = await driver
+      .wait(
+        until.elementLocated(By.css(`header + div + div > div > div`)),
+        1000
+      )
+      .then(async (element) => {
+        const title = await element.getText().then((text) => {
+          return text;
+        });
+        return title;
+      });
+    if (text.includes("(SOLD)"))
+      return { ...post, text, title, isAvailable: false };
     let author = await extractAuthor(driver);
     let images = (await extractImages(driver)).slice(1);
     if (!images || images.length > 30) images = [];
     if (!author) author = post.author || "";
     // console.log({ ...post, author, imageUrl: images[0], images  });
-    return { ...post, author, imageUrl: images[0], images };
+    return { ...post, author, text, title, imageUrl: images[0], images };
   } catch (e) {
-    return false;
+    return { ...post, isAvailable: false };
   }
 };
 
