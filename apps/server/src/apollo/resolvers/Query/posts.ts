@@ -21,7 +21,7 @@ export const posts = async (
 
   return await ctx.prisma.post.findMany({
     where: {
-      // flagged: false,
+      isAvailable: true,
       confirmed: true,
     },
     orderBy: {
