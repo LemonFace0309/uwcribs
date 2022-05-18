@@ -12,6 +12,7 @@ export const PriceRangeInput: FC = () => {
         <Input
           name="min"
           placeholder="Min"
+          type="number"
           icon={<BiDollar />}
           labelClassName="mr-3"
           inputClassName="w-24"
@@ -19,6 +20,7 @@ export const PriceRangeInput: FC = () => {
         <Input
           name="max"
           placeholder="Max"
+          type="number"
           icon={<BiDollar />}
           labelClassName="mr-3"
           inputClassName="w-24"

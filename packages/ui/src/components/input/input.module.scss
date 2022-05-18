@@ -4,19 +4,33 @@
  * https://moderncss.dev/custom-css-styles-for-form-inputs-and-textareas/
 */
 
+.label {
+  position: relative;
+
+  & > svg {
+    position: absolute !important;
+    height: 100%;
+    margin: auto 8px;
+  }
+}
+
 .input {
   font-size: 16px;
-  font-size: max(16px, 1em);
+  font-size: max(16px, 1rem);
   font-family: inherit;
-  padding: 0.25em 0.5em;
+  padding: 4px 8px;
   background-color: #fff;
   border: 2px solid var(--color-navy-100);
   border-radius: 4px;
+  height: 100%;
 
   &:focus {
     border-color: hsl(245, 100%, 42%);
     box-shadow: 0 0 0 3px hsla(245, 100%, calc(42% + 40%), 0.8);
     transition: 180ms box-shadow ease-in-out;
     outline: 3px solid transparent;
+  }
+  &.inputWithIcon {
+    padding-left: 32px;
   }
 }
