@@ -29,6 +29,7 @@ const Search: NextPage<{ searchParams: SearchProps }> = ({ searchParams }) => {
             {NavTabList({})}
 
             <TabPanel>
+              {/* Present only on Tablet/Mobile */}
               <FilterModal />
               <div className={styles.container}>
                 <div className={styles.postsContainer}>

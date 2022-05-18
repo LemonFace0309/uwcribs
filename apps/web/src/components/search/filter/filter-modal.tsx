@@ -12,18 +12,16 @@ export const FilterModal: FC = () => {
       <Button onClick={() => setShow(true)} variant="outline">
         Set Filters
       </Button>
-      {show && (
-        <Modal>
-          <Filter />
+      <Modal open={show} onClose={() => setShow(false)}>
+        <Filter />
 
-          <Button
-            onClick={() => setShow(false)}
-            variant="rounded-outline"
-            className="mt-8">
-            Apply Filters
-          </Button>
-        </Modal>
-      )}
+        <Button
+          onClick={() => setShow(false)}
+          variant="rounded-outline"
+          className="mt-8">
+          Apply Filters
+        </Button>
+      </Modal>
     </div>
   );
 };

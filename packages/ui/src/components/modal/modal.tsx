@@ -1,36 +1,61 @@
-import { FC, ReactNode } from "react";
+import { FC, Fragment, ReactNode } from "react";
 
+import { Dialog, Transition } from "@headlessui/react";
 import cx from "classnames";
 
 type Props = {
   children?: ReactNode;
   className?: string;
-  maxWidth?: string;
-  maxHeight?: string;
+  title?: string;
+  open: boolean;
+  onClose: () => void;
 };
 
 export const Modal: FC<Props> = ({
   children,
   className,
-  maxWidth = "max-w-2xl",
-  maxHeight = "max-h-screen",
-}) => (
-  <div className={cx(className, "fixed rounded-xl shadow-md z-50 inset-0")}>
-    <div
-      className={cx(
-        "grid place-items-center h-full max-h-screen overflow-auto text-center md:px-4 md:pb-8"
-      )}>
-      <div
-        className={cx(
-          "inline-block w-full text-left align-middle transition-all transform bg-white md:shadow-xl md:rounded-2xl",
-          maxWidth,
-          maxHeight,
-          className
-        )}>
-        <div className="flex flex-col h-full max-h-screen p-4 overflow-y-auto">
-          {children}
+  title,
+  open,
+  onClose,
+}) => {
+  return (
+    <Transition appear show={open} as={Fragment}>
+      <Dialog as="div" className="relative z-10" onClose={onClose}>
+        <Transition.Child
+          as={Fragment}
+          enter="ease-out duration-300"
+          enterFrom="opacity-0"
+          enterTo="opacity-100"
+          leave="ease-in duration-200"
+          leaveFrom="opacity-100"
+          leaveTo="opacity-0">
+          <div className="fixed inset-0 bg-black bg-opacity-25" />
+        </Transition.Child>
+
+        <div className="fixed inset-0 overflow-y-auto">
+          <div className="flex items-center justify-center min-h-full p-4 text-center">
+            <Transition.Child
+              as={Fragment}
+              enter="ease-out duration-300"
+              enterFrom="opacity-0 scale-95"
+              enterTo="opacity-100 scale-100"
+              leave="ease-in duration-200"
+              leaveFrom="opacity-100 scale-100"
+              leaveTo="opacity-0 scale-95">
+              <Dialog.Panel className="w-full max-w-md p-6 overflow-hidden text-left align-middle bg-white shadow-xl transform rounded-2xl transition-all">
+                {title && (
+                  <Dialog.Title
+                    as="h3"
+                    className="text-lg font-medium text-gray-900 leading-6">
+                    {title}
+                  </Dialog.Title>
+                )}
+                {children}
+              </Dialog.Panel>
+            </Transition.Child>
+          </div>
         </div>
-      </div>
-    </div>
-  </div>
-);
+      </Dialog>
+    </Transition>
+  );
+};
