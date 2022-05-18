@@ -84,7 +84,7 @@ export const updateAllPosts = async (req, res) => {
   for (let i = 0; i < posts.length; i++) {
     for (let j = 0; j < posts[i].length; j++) {
       post = await checkIfPostStillExists(driver, posts[i][j]._doc);
-      if (!post.isAvailable) continue;
+      // if (!post.isAvailable) continue;
       if (!post) {
         updatedPosts.push({ ...posts[i][j]._doc, isAvailable: false });
       } else {
