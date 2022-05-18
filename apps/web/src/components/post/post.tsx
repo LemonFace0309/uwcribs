@@ -41,7 +41,7 @@ export const Post: FC<Props> = ({
         />
       </div>
 
-      <div className="w-full">
+      <div className="w-full break-words">
         <p className="text-xs font-extralight">{startCase(type)}</p>
         <h1 className="text-xl">{title || "Icon Apartment"}</h1>
         <Seperator className="my-2" />
@@ -59,7 +59,7 @@ export const Post: FC<Props> = ({
           <p className="text-xs font-light">{`${availableBeds} beds • ${baths} baths`}</p>
           <p className="text-xs font-light">{amenities.join(" • ")}</p>
         </div>
-        <p className="my-4 text-xs font-light whitespace-pre-line">
+        <p className="my-4 text-xs font-light break-words whitespace-pre-line">
           {description}
         </p>
         <div className="flex items-center justify-between w-full">
