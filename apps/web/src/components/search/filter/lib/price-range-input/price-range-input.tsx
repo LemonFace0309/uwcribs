@@ -36,7 +36,7 @@ export const PriceRangeInput: FC = () => {
   return (
     <>
       <p className="mt-10 mb-4 text-sm font-bold">Price Range</p>
-      <div className="flex">
+      <div className="flex items-center">
         <Input
           name="min"
           placeholder="Min"

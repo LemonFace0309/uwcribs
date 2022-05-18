@@ -23,14 +23,32 @@
   border: 2px solid var(--color-navy-100);
   border-radius: 4px;
   height: 100%;
+  transition: 180ms box-shadow ease-in-out;
+
+  &.inputWithIcon {
+    padding-left: 32px;
+  }
+
+  &:not(textarea) {
+    line-height: 1;
+    height: 2.25rem;
+  }
+
+  &[readonly] {
+    border-style: dotted;
+    cursor: not-allowed;
+    color: #777;
+  }
+
+  &[disabled] {
+    border: 2px solid #ccc;
+    background-color: #eee;
+    cursor: not-allowed;
+  }
 
   &:focus {
     border-color: hsl(245, 100%, 42%);
     box-shadow: 0 0 0 3px hsla(245, 100%, calc(42% + 40%), 0.8);
-    transition: 180ms box-shadow ease-in-out;
     outline: 3px solid transparent;
-  }
-  &.inputWithIcon {
-    padding-left: 32px;
   }
 }
