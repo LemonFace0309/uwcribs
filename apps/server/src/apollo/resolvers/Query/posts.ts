@@ -59,6 +59,16 @@ const constructPostsQuery = (options: PostOptions): QueryDslQueryContainer => {
       },
     });
   }
+  if (options.priceMin || options.priceMax) {
+    must.push({
+      range: {
+        ppp: {
+          gte: options.priceMin ?? 0,
+          lte: options.priceMax ?? 999999,
+        },
+      },
+    });
+  }
 
   if (must.length) {
     query.bool = {};

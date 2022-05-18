@@ -16,6 +16,10 @@ export const reducer = (
       return { ...cloneDeep(state), availableBeds: parseInt(action.value) };
     case "baths":
       return { ...cloneDeep(state), baths: parseInt(action.value) };
+    case "priceMin":
+      return { ...cloneDeep(state), priceMin: parseInt(action.value) };
+    case "priceMax":
+      return { ...cloneDeep(state), priceMax: parseInt(action.value) };
     case "clear":
       return cloneDeep(defaultSearchParams);
     default:

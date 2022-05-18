@@ -6,6 +6,8 @@ input PostOptions {
   season: SeasonEnum
   availableBeds: Int
   baths: Int
+  priceMin: Int
+  priceMax: Int
 }
 
 type Post {
