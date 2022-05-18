@@ -13,7 +13,7 @@ export const Filter: FC = () => {
   const { dispatch } = useSearchContext();
 
   return (
-    <div>
+    <div className="sticky top-4">
       <div className="flex items-center justify-between">
         <p className="text-sm font-bold uppercase">Filter Results</p>
         <Button
