@@ -15,12 +15,14 @@ export const FilterModal: FC = () => {
       <Modal open={show} onClose={() => setShow(false)}>
         <Filter />
 
-        <Button
-          onClick={() => setShow(false)}
-          variant="rounded-outline"
-          className="mt-8">
-          Apply Filters
-        </Button>
+        <div className="flex items-center">
+          <Button
+            onClick={() => setShow(false)}
+            variant="rounded-outline"
+            className="mt-8">
+            Done
+          </Button>
+        </div>
       </Modal>
     </div>
   );

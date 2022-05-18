@@ -15,7 +15,7 @@ export const posts = async (
     const res = await ctx.elastic.search({
       index: "posts_v1",
       query: constructPostsQuery(args.options),
-      size: 300,
+      size: 45,
     });
     return res.hits.hits.map((obj) => obj._source);
   }
