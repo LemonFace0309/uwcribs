@@ -16,9 +16,12 @@ import { NavTabList } from "@src/components/search/nav-tab-list";
 import { SearchProps, SearchProvider } from "@src/context/search";
 import { addApolloState, initializeApollo } from "@src/lib/apollo-client";
 import { getPostsSearchParams } from "@src/lib/search";
+import { useBreakpoint } from "@src/lib/use-breakpoint";
 import styles from "@src/styles/pages/search.module.scss";
 
 const Search: NextPage<{ searchParams: SearchProps }> = ({ searchParams }) => {
+  const size = useBreakpoint();
+
   return (
     <>
       <Meta title="UW Cribs" keywords={["search"]} />
@@ -35,9 +38,7 @@ const Search: NextPage<{ searchParams: SearchProps }> = ({ searchParams }) => {
                 <div className={styles.postsContainer}>
                   <Posts />
                 </div>
-                <div className="hidden 2xl:block">
-                  <Filter />
-                </div>
+                <div>{size["2xl"] && <Filter />}</div>
               </div>
             </TabPanel>
           </Tabs>

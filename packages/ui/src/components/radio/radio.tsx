@@ -24,7 +24,6 @@ export const Radio = forwardRef<HTMLInputElement, RadioProps>(function Radio(
       <input
         {...rest}
         className={styles.input}
-        defaultChecked={isChecked}
         checked={isChecked}
         disabled={isDisabled}
         name={name}
