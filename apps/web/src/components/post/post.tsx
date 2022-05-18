@@ -28,7 +28,7 @@ export const Post: FC<Props> = ({
   genderRestriction,
 }) => {
   return (
-    <div className="flex flex-col items-center max-w-4xl my-4 md:flex-row space-y-4 md:space-y-0 md:space-x-4">
+    <div className="flex flex-col items-center max-w-4xl mx-auto my-4 md:flex-row space-y-4 md:space-y-0 md:space-x-4">
       <div className="relative w-full overflow-hidden rounded-xl shrink-0 md:w-[300px] h-[216px]">
         <Ribbon>{genderRestriction}</Ribbon>
         <img
@@ -68,8 +68,9 @@ export const Post: FC<Props> = ({
             variant="rounded-outline"
             color="sea"
             size="sm"
+            className="flex items-center"
             onClick={() => window.open(fbLink, "_blank")}>
-            <GrFacebook className="inline-block mr-1" size="16px" />
+            <GrFacebook className="inline-block h-8 mr-2" size="16px" />
             <p className="inline text-xs">Contact Seller</p>
           </Button>
         </div>
