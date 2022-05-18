@@ -32,7 +32,7 @@ const PostSchema = new mongoose.Schema(
     },
     season: {
       type: String,
-      default: "spring",
+      default: "fall",
       enum: ["spring", "fall", "winter"],
     },
   },
