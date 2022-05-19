@@ -14,6 +14,10 @@ import { Ribbon } from "./ribbon";
 
 type Props = Unwrap<GetPostsQuery["posts"]>;
 
+const isValidPPP = (ppp: number | undefined | null) => {
+  return ppp && ppp < 2500 && ppp > 200;
+};
+
 export const Post: FC<Props> = ({
   type,
   title,
@@ -63,7 +67,11 @@ export const Post: FC<Props> = ({
           {description}
         </p>
         <div className="flex items-center justify-between w-full">
-          <p className="text-xl font-bold">{`$${ppp}/month per person`}</p>
+          <p className="text-xl font-bold">
+            {isValidPPP(ppp)
+              ? `$${ppp}/month per person`
+              : `Contact Seller for Price →`}
+          </p>
           <Button
             variant="rounded-outline"
             color="sea"
