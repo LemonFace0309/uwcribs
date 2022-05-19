@@ -14,8 +14,8 @@ import { Ribbon } from "./ribbon";
 
 type Props = Unwrap<GetPostsQuery["posts"]>;
 
-const isValidPPP = (ppp) => {
-  return ppp < 2500 && ppp > 200;
+const isValidPPP = (ppp: number | undefined | null) => {
+  return ppp && ppp < 2500 && ppp > 200;
 };
 
 export const Post: FC<Props> = ({
