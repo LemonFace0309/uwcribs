@@ -2,8 +2,6 @@
 
 **Description**:  Finding and selling short term rentals is a universal pain amongst postsecondary students. This repository contains the code for UW Cribs, a product serving the Waterloo postsecondary student community by providing a centralized filterable interface for housing posts made on Facebook groups. This project is still in its infancy but we hope from Day One to provide an enjoyable experience for students finding housing.
 
-Other things to include:
-
   - **Technology stack**: This repository contains code for a Turborepo monorepo, using Yarn as a package manager. It contains both `apps` and `packages`:
   * `apps`
     * `web`
