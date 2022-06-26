@@ -1,12 +1,11 @@
-import dotenv from "dotenv";
 import express from "express";
 import mongoose from "mongoose";
+
+import "dotenv/config";
 
 import { startup } from "./driver";
 import { logEntities } from "./nlp";
 import router from "./routes";
-
-dotenv.config();
 
 const app = express();
 
@@ -40,5 +39,5 @@ mongoose.connection.on("error", function () {
 app.use(router);
 
 app.listen(PORT, () => {
-  console.log(`Example app listening on port ${PORT}`); // eslint-disable-line no-console
+  console.log(`Parser listening on port ${PORT}`); // eslint-disable-line no-console
 });

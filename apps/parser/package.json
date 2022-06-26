@@ -1,14 +1,14 @@
 {
-  "name": "selenium-scraper",
+  "name": "parser",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "jest --coverage",
+    "test": "jest --passWithNoTests --coverage",
     "dev": "nodemon --ignore ./classifier/ -r esm index.js"
   },
   "author": "",
-  "license": "ISC",
+  "license": "MIT",
   "dependencies": {
     "aws-sdk": "^2.1133.0",
     "dotenv": "^16.0.0",
